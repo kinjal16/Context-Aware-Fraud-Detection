@@ -25,6 +25,9 @@ app.configure(function () {
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 //app.listen(4297);
+
+global.CONFIG_FILE = require('./configuration/config');
+
 require('./routes/router')(app);
 
 http.createServer(app).listen(app.get('port'), function(){
