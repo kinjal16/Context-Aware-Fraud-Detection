@@ -1,4 +1,5 @@
 var	ejs = require("ejs");
+var cpt = require('./cptInfo');
 
 module.exports = function(app){
 
@@ -16,4 +17,8 @@ module.exports = function(app){
                 }
         });		
     });
+    
+    app.get('/searchCPT', cpt.getCPTSearchPage);
+    
+    app.get('/searchCPTByCode', cpt.getCPTDetails);
 }

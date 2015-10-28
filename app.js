@@ -9,9 +9,7 @@ var express = require("express");
 var path = require("path");
 var	ejs = require("ejs");
 var app = express();
-var request = require("request");
 
-var app = express();
 app.set('port', '3000');
 app.set('views', path.join(__dirname, 'views'));
 // all environments
@@ -25,6 +23,9 @@ app.configure(function () {
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 //app.listen(4297);
+
+global.CONFIG_FILE = require('./configuration/config');
+
 require('./routes/router')(app);
 
 http.createServer(app).listen(app.get('port'), function(){

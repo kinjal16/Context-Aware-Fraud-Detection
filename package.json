@@ -6,7 +6,8 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.4.8",
-    "ejs": "*"
+    "async": "^1.5.0",
+    "ejs": "*",
+    "express": "3.4.8"
   }
 }
