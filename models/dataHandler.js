@@ -1,5 +1,4 @@
 var http = require('http');
-var async = require('async');
 
 var httpCallback = function(res, callback){
 	var httpResponse = '';
@@ -91,7 +90,7 @@ module.exports.requestDrillAPI = function(param, callback){
             data: null,
             error: 1,
             status: req.statusCode,
-            msg: "Connection to query service refused"
+            msg: "Connection to Apache Drill refused"
         });						
     });	
     req.end();				

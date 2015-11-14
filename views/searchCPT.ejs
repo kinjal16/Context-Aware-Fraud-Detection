@@ -27,7 +27,33 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 
     <script src="../js/modernizr.js"></script>
-</head>
+    <script>
+       $(document).ready(function() {
+           $('#cpttype').on('change', function() {
+              if ( this.value === 'code'){
+                $("#code-display").show();
+                $("#descr-display").hide();
+                $("#range-display").hide();              
+              }else if ( this.value === 'descr'){
+                $("#descr-display").show();
+                $("#code-display").hide();
+                $("#range-display").hide();
+              }else if(this.value === 'codeRange'){
+                $("#descr-display").hide();
+                $("#code-display").hide();
+                $("#range-display").show();  
+              }else{
+                $("#descr-display").hide();
+                $("#code-display").hide();
+                $("#range-display").hide();  
+              }
+            }).trigger("change");
+           
+       });
+  
+    </script>
+    
+</head> 
 
 <body>
 
@@ -77,41 +103,66 @@
 
                     <div class="col-lg-6">
 
-                        <form action="/searchCPTByCode" method="get">
-                            <%if(code) { %>
-                                CPT Code : <input required type="text" id="cpt" name="cpt" value="<%=code%>"></input>
-                           <%}else {%>
-                                CPT Code : <input required type="text" id="cpt" name="cpt"></input>
-                            <% } %>
-                            <button type="submit" class="btn btn-default">Search</button>            
+                        <form action="/searchCPTByCode" id="cptinfo" name = "cptinfo" method="get">
+                            Search By : <select id="cpttype" name="cpttype"  >
+                                              <option value="code" selected>CPT Code</option>
+                                              <option value="descr">Description</option>
+                                              <option value="codeRange">Code Range</option>
+                                              <option value="costRange">Cost Range</option>
+                                        </select>
+                           
+                            <div id="code-display">
+                                 <%if(code) { %>
+                                    CPT Code : <input  type="text" id="cpt" name="cpt" value="<%=code%>"></input>
+                               <%}else {%>
+                                    CPT Code : <input  type="text" id="cpt" name="cpt"></input>
+                                <% } %>
+                            </div>
+                    
+                            <div id="descr-display">
+                                 <%if(descrCPT) { %>
+                                    Description : <input  type="text" id="cptdescr" name="cptdescr" value="<%=descrCPT%>"></input>
+                               <%}else {%>
+                                    Description : <input  type="text" id="cptdescr" name="cptdescr"></input>
+                                <% } %>
+                            </div>
+            
+                             <div id="range-display">
+                                <%if(rangeFrom && rangeTo) { %>
+                                   CPT Code between : <input  type="text" id="from" name="from" value = "<%=rangeFrom%>"></input> and 
+                                    <input  type="text" id="to" name="to" value="<%=rangeTo%>"></input> 
+                               <%}else {%>
+                                    CPT Code between : <input  type="text" id="from" name="from"></input> and 
+                                    <input  type="text" id="to" name="to"></input>
+                                <% } %> 
+                            </div> 
+
+                            <button type="submit" class="btn btn-default" >Search</button>            
 
                         </form>              
-
+                        
                     </div>
 
                 </div>
                 
                  <div id="tab1">
                     
-                             <%if(!isNewSearch){ %>
-                             
-                             <table id="details" class="table table-striped table-bordered">
-                             	<thead><tr><th>CPT Code</th><th>Description</th><th>Total Cost</th></tr></thead>
-								<tbody>
-                                    <% for(var count = 0; count < length; count++){ %>
-                                        <tr>
-                                            <td><%=data[count].CPT%></td>
-                                            <td><%=data[count].Description%></td>
-                                            <td><%=data[count].Cost%></td>										
-										</tr>
-                                    
-									  <%}%> 		
-										
-								</tbody>
-				              </table>
-				              <%} %>
+                     <%if(!isNewSearch){ %>                             
+                         <table id="details" class="table table-striped table-bordered">
+                            <thead><tr><th>CPT Code</th><th>Description</th><th>Total Cost</th></tr></thead>
+                            <tbody>
+                                <% for(var count = 0; count < length; count++){ %>
+                                    <tr>
+                                        <td><%=data[count].CPT%></td>
+                                        <td><%=data[count].Description%></td>
+                                        <td><%=data[count].Cost%></td>										
+                                    </tr>
+                                  <%}%> 		
+                            </tbody>
+                          </table>
+                      <%} %>
                              	
-                          </div>
+                </div>
 
                 <!-- /.row -->
             </div>

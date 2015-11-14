@@ -1,5 +1,6 @@
 var	ejs = require("ejs");
 var cpt = require('./cptInfo');
+var dashboard = require('./dashboard');
 
 module.exports = function(app){
 
@@ -18,7 +19,13 @@ module.exports = function(app){
         });		
     });
     
+    app.get('/dashboard', dashboard.getDashboard);
+    
     app.get('/searchCPT', cpt.getCPTSearchPage);
     
     app.get('/searchCPTByCode', cpt.getCPTDetails);
+    
+   // app.get('/searchCPTRange', cpt.getCPTRange);
+    
+    //app.get('/searchCPTByRange', cpt.getCPTByRange);
 }
