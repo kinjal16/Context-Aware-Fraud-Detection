@@ -33,10 +33,9 @@
 
     <div id="wrapper">
         <!-- Navigation -->
-
-       <% // include file="SideBar.jsp" %> 
+		<% include sideBar.ejs %>
+       <div id="side"></div>
         <div id="page-wrapper">
-
             <div class="container-fluid">
 
                 <!-- Page Heading -->
@@ -76,7 +75,6 @@
                 <div class="row">
 
                     <div class="col-lg-6">
-
                         <form action="/searchCPTByCode" method="get">
                             <%if(code) { %>
                                 CPT Code : <input required type="text" id="cpt" name="cpt" value="<%=code%>"></input>
