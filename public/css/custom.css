@@ -1,0 +1,87 @@
+#container1{
+	color: black;
+	font-weight: bold;
+}
+#detectfraud{
+	background-color:#337ab7;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:18px;
+	border:1px solid #337ab7;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:12px 21px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #337ab7;
+}
+#detectfraud:hover{
+	background-color:#99CCFF;
+}
+#tab1 table { 
+	border-collapse: collapse; 
+	text-align: left; 
+	width: 100%;
+}
+#tab1{
+	font: normal 12px/150% Arial, Helvetica, sans-serif;
+	background: #fff;
+	overflow: hidden;
+	border: 1px solid #337ab7;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+#tab1 table td, th { padding: 3px 10px; }
+#tab1 table thead th {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #337ab7), color-stop(1, #337ab7) );
+	background:-moz-linear-gradient( center top, #7D997D 5%, #187F11 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7D997D', endColorstr='#187F11');
+	background-color:#7D997D; 
+	color:#FFFFFF; 
+	font-size: 15px; 
+	font-weight: bold; 
+	border-left: 1px solid #337ab7;
+}
+#tab1 table thead th:first-child { border: none; }
+#tab1 table tbody td { color: black; border-left: 1px solid #C6FFC2;font-size: 12px;font-weight: normal; }
+#tab1 table tbody .alt td { 
+	background: #DFFFDE; 
+	color: #337ab7; 
+}
+#tab1 table tbody td:first-child { border-left: none; }
+#tab1 table tbody tr:last-child td { border-bottom: none; }
+#tab1 table tfoot td div { border-top: 1px solid #337ab7;background: #DFFFDE;}
+#tab1 table tfoot td { padding: 0; font-size: 12px }
+#tab1 table tfoot td div{ padding: 2px; }
+#tab1 table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }
+#tab1 table tfoot  li { display: inline; }
+#tab1 table tfoot li a {
+	text-decoration: none; 
+	display: inline-block;  
+	padding: 2px 8px; 
+	margin: 1px;
+	color: #FFFFFF;
+	border: 1px solid #337ab7;
+	-webkit-border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	border-radius: 3px; 
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #337ab7), color-stop(1, #337ab7) );
+	background:-moz-linear-gradient( center top, #337ab7 5%, #337ab7 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#337ab7', endColorstr='#337ab7');
+	background-color:#337ab7; 
+}
+#tab1 table tfoot ul.active, .datagrid table tfoot ul a:hover {
+	text-decoration: none;
+	border-color: #337ab7; 
+	color: #FFFFFF; 
+	background: none; 
+	background-color:#337ab7;
+}div.dhtmlx_window_active, div.dhx_modal_cover_dv { position: fixed !important; }
+/*modal for red flag*/
+.redFlag{
+	height:19px;
+	width:20px;
+}
