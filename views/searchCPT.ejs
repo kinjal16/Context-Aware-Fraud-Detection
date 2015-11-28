@@ -59,10 +59,9 @@
 
     <div id="wrapper">
         <!-- Navigation -->
-
-       <% // include file="SideBar.jsp" %> 
+		<% include sideBar.ejs %>
+       <div id="side"></div>
         <div id="page-wrapper">
-
             <div class="container-fluid">
 
                 <!-- Page Heading -->
@@ -101,9 +100,8 @@
 
                 <div class="row">
 
-                    <div class="col-lg-6">
-
-                        <form action="/searchCPTByCode" id="cptinfo" name = "cptinfo" method="get">
+                    <div class="col-lg-6">    
+						<form action="/searchCPTByCode" id="cptinfo" name = "cptinfo" method="get">
                             Search By : <select id="cpttype" name="cpttype"  >
                                               <option value="code" selected>CPT Code</option>
                                               <option value="descr">Description</option>
@@ -137,8 +135,7 @@
                                 <% } %> 
                             </div> 
 
-                            <button type="submit" class="btn btn-default" >Search</button>            
-
+                            <button type="submit" class="btn btn-default" >Search</button>
                         </form>              
                         
                     </div>

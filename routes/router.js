@@ -1,5 +1,7 @@
 var	ejs = require("ejs");
 var cpt = require('./cptInfo');
+var login = require('./loginInfo');
+var client = require("../redis-client.js");
 var dashboard = require('./dashboard');
 var express = require('express');
 var path = require('path');
@@ -29,9 +31,8 @@ var router = express.Router();
     
     router.get('/searchCPTByCode', cpt.getCPTDetails);
     
-   // app.get('/searchCPTRange', cpt.getCPTRange);
+    router.get('/login', login.getLoginPage);
     
-    //app.get('/searchCPTByRange', cpt.getCPTByRange);
-//}
+    router.post('/validateUser', login.getLoginDetails);
 
 module.exports = router;

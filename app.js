@@ -8,6 +8,9 @@ var http = require("http");
 var express = require("express");
 var path = require("path");
 var	ejs = require("ejs");
+var request = require("request");
+var client = require("./redis-client.js");
+var app = express();
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser=require('body-parser');
@@ -30,6 +33,10 @@ var routes = require('./routes/router');
 app.use('/ui',express.static(path.join(__dirname, 'public')));
 app.use('/',routes);
 
+client.on('connect', function() {
+    console.log('Redis connected');
+});
+
 var server = http.createServer(app);
 
 server.listen(app.get('port'), function(){
@@ -39,6 +46,7 @@ server.listen(app.get('port'), function(){
 // all environments
 /*app.configure(function () {
 	app.use(express.cookieParser());
+	app.use(express.session({secret: "LP1988"}));
 	app.use(express.bodyParser());
 	app.use(express.json());
 	app.use(express.methodOverride());
@@ -47,10 +55,9 @@ server.listen(app.get('port'), function(){
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });*/
 
-
-
 //require('./routes/router')(app);
 /*
+>>>>>>> 2a7b267a5e6c78d710f1a3073c3202c81bc24ae4
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });*/
