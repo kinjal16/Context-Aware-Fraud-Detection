@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/highcharts-more.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>	
+	<script src="http://code.highcharts.com/highcharts-3d.js"></script>
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <title>Context-Aware Fraud Detection</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/ui/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/ui/css/sb-admin.css" rel="stylesheet">
+
+    
+
+    <!-- Custom Fonts -->
+    <link href="/ui/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+</head>
+<body>
+ <script type="text/javascript">
+
+function googleTranslateElementInit() {
+
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+
+}
+
+</script>
+<script>
+$(document).ready(function(){
+    $('#container1').highcharts({
+        chart: {
+            type: 'column',
+            spacingBottom: 30
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: 'Month',
+            floating: true,
+            align: 'right',
+            verticalAlign: 'bottom',
+            y: 15
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 250,
+            y: 50,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
+        },
+        yAxis: {
+            min : 0,
+            title: {
+                text: 'Y-Axis'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    this.x + ': ' + this.y;
+            }
+        },
+        plotOptions: {
+            area: {
+                fillOpacity: 0.5
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Total Claim',
+            data: [<% if(data){ %>
+                        <%=data.monthlyClaim%>
+                 <% } %>]
+        },{
+            name: 'Fraud Claim',
+            data: [<% if(data){ %>
+                        <%=data.monthlyFraud%>
+                 <% } %>]
+        }]
+    });
+});
+</script>
+    <div id="wrapper">
+   
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Dashboard 
+                        </h1>        
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-users fa-5x"></i> 
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                        <% if(data){ %>
+                                            <%=data.totalEmployees%>    
+                                        <% } else{%>
+                                            <%=0%>
+                                        <% }%>
+                                        </div>
+                                        <div>Total Employees!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-newspaper-o fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                             <% if(data){ %>
+                                                <%=data.totalClaims%>    
+                                            <% } else{%>
+                                                <%=0%>
+                                            <% }%>
+                                        </div>
+                                        <div>Total Claims Submitted!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-exclamation-triangle fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                            <% if(data) { %>
+                                                <%=data.totalFraud%>
+                                            <%} else{ %>
+                                                <%=0%>
+                                            <% } %>
+                                        </div>
+                                        <div>Fraud Claims!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-area-chart fa-fw"></i>Fraud claims by month</h3>
+                            </div>
+                              <div class="panel-body">
+                            <!--    <div id="morris-area-chart"></div>-->
+                             <div id="container1" style="min-width: 110px; height: 300px; margin: 0 auto"></div>
+                            </div>                           
+                        </div>                       
+                    </div> 
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-circle-o-notch fa-fw"></i> Top employees with fraud claims</h3>
+                            </div>
+                              <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                 <tr>
+                                                    <th>Employee Name</th>
+                                                    <th>Department</th>                                                   
+                                                    <th>Number of Fraud Claims</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% if(data){
+                                                    if(data.fraudEmpData){
+                                                        for(var rows in data.fraudEmpData){ %>
+                                                            <tr>
+                                                                <td><%=data.fraudEmpData[rows].emp[0].FirstName%>
+                                                                <%=data.fraudEmpData[rows].emp[0].LastName%></td>
+                                                                <td><%=data.fraudEmpData[rows].emp[0].department%></td>
+                                                               <td><%=data.fraudEmpData[rows].count.value%></td>
+                                                            </tr>                                                
+                                                        <%}
+                                                    }                
+                                                }%>                          
+                                            </tbody>
+                                        </table>
+                                      </div>                               
+                            </div>                           
+                        </div>                       
+                    </div>                    
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                   
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Fraud claims submitted this month</h3>
+                            </div>
+                            <div class="panel-body">          
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                 <tr>
+                                                    <th>Employee Name</th>
+                                                    <th>Bill No</th>
+                                                    <th>Bill Date</th>                                       
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% if(data){
+                                                    if(data.currMonthFraud){
+                                                        for(var rows in data.currMonthFraud){ %>
+                                                            <tr>
+                                                                <td><%=data.currMonthFraud[rows].FirstName%>
+                                                                    <%=data.currMonthFraud[rows].LastName%></td>
+                                                                <td><%=data.currMonthFraud[rows].billno%></td>
+                                                                <td><%=data.currMonthFraud[rows].billdate%></td>                                                    
+                                                            </tr>                                                
+                                                        <%}
+                                                    }                
+                                                }%>                          
+                                            </tbody>
+                                        </table>
+                                    </div>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Top CPT with highest number of fraud claims</h3>
+                        </div>
+                         <div class="panel-body">
+                               <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped">
+                                    <thead>
+                                         <tr>
+                                            <th>CPT Code</th>
+                                            <th>Description</th>
+                                            <th>Cost</th>
+                                            <th>Fraud Count</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% if(data){
+                                            if(data.fraudCPTData){
+                                                for(var rows in data.fraudCPTData){ %>
+                                                    <tr>
+                                                        <td><%=data.fraudCPTData[rows].cpt[0].CPT%></td>
+                                                        <td><%=data.fraudCPTData[rows].cpt[0].Description%></td>
+                                                        <td><%=data.fraudCPTData[rows].cpt[0].Cost%></td>                                                                                                 <td><%=data.fraudCPTData[rows].count.value%></td>
+                                                    </tr>                                                
+                                                <%}
+                                            }                
+                                        }%>                          
+                                    </tbody>
+                                </table>
+                              </div>                             
+                         </div>                                                     
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+		<div id="google_translate_element" align="right"></div>
+    </div>
+    <!-- /#wrapper -->
+	
+    <!-- jQuery -->
+  <!--   <script src="js/jquery.js"></script>--> 
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/ui/js/bootstrap.min.js"></script>  
+
+</body>
+</html>

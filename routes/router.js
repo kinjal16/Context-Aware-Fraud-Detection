@@ -2,10 +2,15 @@ var	ejs = require("ejs");
 var cpt = require('./cptInfo');
 var login = require('./loginInfo');
 var client = require("../redis-client.js");
+var dashboard = require('./dashboard');
+var express = require('express');
+var path = require('path');
 
-module.exports = function(app){
+var router = express.Router();
 
-	app.get('/', function (req, res) {
+//module.exports = function(app){
+
+	router.get('/', function (req, res) {
         ejs.renderFile('views/landing.ejs',
                 function(err, result) {
                 // render on success
@@ -20,11 +25,14 @@ module.exports = function(app){
         });		
     });
     
-    app.get('/searchCPT', cpt.getCPTSearchPage);
+    router.get('/dashboard', dashboard.getDashboard);
     
-    app.get('/searchCPTByCode', cpt.getCPTDetails);
+    router.get('/searchCPT', cpt.getCPTSearchPage);
     
-    app.get('/login', login.getLoginPage);
+    router.get('/searchCPTByCode', cpt.getCPTDetails);
     
-    app.post('/validateUser', login.getLoginDetails);
-}
+    router.get('/login', login.getLoginPage);
+    
+    router.post('/validateUser', login.getLoginDetails);
+
+module.exports = router;

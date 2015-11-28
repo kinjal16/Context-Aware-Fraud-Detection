@@ -1,5 +1,6 @@
 var	ejs = require("ejs");
 var request = require("request");
+var async = require("async");
 var drillAPI = require('../models/dataHandler');
 var client = require("../redis-client.js");
 
@@ -16,7 +17,7 @@ exports.getLoginPage = function(req, res){
    });	    
 };
 
-exports.getCPTCache = function(req,res){
+exports.getCPTCache = function(req, res, next){
 	var jsonObject = {};
     var params = {};
     
@@ -25,9 +26,18 @@ exports.getCPTCache = function(req,res){
     params.body = jsonObject;
     drillAPI.requestDrillAPI(params, function(result){
         if(result){
-        	for (var i = 0; i < result.data.rows.length; i++) {
-        		client.hmset(result.data.rows[i].CPT,{description:result.data.rows[i].Description, cost:result.data.rows[i].Cost});
-        	}
+        	async.forEach(result.data.rows, function(item, callback) {
+        		client.hmset(item.CPT, {description: item.Description, cost:item.Cost});
+        		callback();
+        	}, function(err){
+                if(err) {
+                    console.log(err);
+                    next();
+                }
+                else{
+                	next();
+                }                                
+        	});          
         }
     });
 };
