@@ -1,9 +1,14 @@
 var	ejs = require("ejs");
 var cpt = require('./cptInfo');
+var dashboard = require('./dashboard');
+var express = require('express');
+var path = require('path');
 
-module.exports = function(app){
+var router = express.Router();
 
-	app.get('/', function (req, res) {
+//module.exports = function(app){
+
+	router.get('/', function (req, res) {
         ejs.renderFile('views/landing.ejs',
                 function(err, result) {
                 // render on success
@@ -18,7 +23,15 @@ module.exports = function(app){
         });		
     });
     
-    app.get('/searchCPT', cpt.getCPTSearchPage);
+    router.get('/dashboard', dashboard.getDashboard);
     
-    app.get('/searchCPTByCode', cpt.getCPTDetails);
-}
+    router.get('/searchCPT', cpt.getCPTSearchPage);
+    
+    router.get('/searchCPTByCode', cpt.getCPTDetails);
+    
+   // app.get('/searchCPTRange', cpt.getCPTRange);
+    
+    //app.get('/searchCPTByRange', cpt.getCPTByRange);
+//}
+
+module.exports = router;
