@@ -182,7 +182,7 @@ input {
 
 /* HEADER SECTION */
 #h {
-	background: url(../images/280_c-3.jpg) no-repeat center top;
+	background: url(/ui/images/280_c-3.jpg) no-repeat center top;
 	padding-top: 10px;
 	text-align:center;
 	background-attachment: relative;
@@ -219,10 +219,10 @@ input {
 
 /* White Section */
 #w {
-	background: white;
+	height: 100%;
 	width: 100%;
-	padding-top: 100px;
-	padding-bottom: 100px;
+	display: block;
+  	position: relative;
 }
 
 #w .col-md-6 {
@@ -232,6 +232,19 @@ input {
 #w p {
 	color: #9f9f9f;
 	font-size: 16px;
+}
+
+#w::after {
+  content: "";
+  background: url(../images/fraud-scrabble.jpg) no-repeat center top;
+  background-size: 100% 100%;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
 
 
