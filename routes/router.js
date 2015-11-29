@@ -35,4 +35,6 @@ var router = express.Router();
     
     router.post('/validateUser', login.getLoginDetails);
 
+    router.get('/download', cpt.getCPTData);
+
 module.exports = router;
