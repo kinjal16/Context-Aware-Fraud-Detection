@@ -60,7 +60,7 @@
     <div id="wrapper">
         <!-- Navigation -->
 		
-
+        <% include SideBar.ejs %>
         <div id="page-wrapper">
             <div class="container-fluid">
 
@@ -102,46 +102,50 @@
 
                     <div class="col-lg-6">    
 						<form action="/searchCPTByCode" id="cptinfo" name = "cptinfo" method="get">
-                            Search By : <select id="cpttype" name="cpttype"  >
-                                              <option value="code" selected>CPT Code</option>
-                                              <option value="descr">Description</option>
-                                              <option value="codeRange">Code Range</option>
-                                              <option value="costRange">Cost Range</option>
-                                        </select>
-                           
-                            <div id="code-display">
-                                 <%if(code) { %>
-                                    CPT Code : <input  type="text" id="cpt" name="cpt" value="<%=code%>"></input>
-                               <%}else {%>
-                                    CPT Code : <input  type="text" id="cpt" name="cpt"></input>
-                                <% } %>
+                            <div class="form-group">
+                                <label>Search By</label>
+                                <select class="form-control" id="cpttype" name="cpttype">
+                                  <option value="code" selected>CPT Code</option>
+                                  <option value="descr">Description</option>
+                                  <option value="codeRange">Code Range</option>                                 
+                                </select>
                             </div>
-                    
-                            <div id="descr-display">
-                                 <%if(descrCPT) { %>
-                                    Description : <input  type="text" id="cptdescr" name="cptdescr" value="<%=descrCPT%>"></input>
+
+                           <div class="form-group" id="code-display">
+                                <%if(code) { %>
+                                    <label>CPT Code :</label> <input class="form-control" type="text" id="cpt" name="cpt" value="<%=code%>"></input>
                                <%}else {%>
-                                    Description : <input  type="text" id="cptdescr" name="cptdescr"></input>
+                                    <label>CPT Code :</label> <input class="form-control" type="text" id="cpt" name="cpt"></input>
+                                <% } %>                               
+                            </div>                         
+                    
+                            <div class="form-group" id="descr-display">
+                                 <%if(descrCPT) { %>
+                                     <label>Description :</label> <input class="form-control" type="text" id="cptdescr" name="cptdescr" value="<%=descrCPT%>"></input>
+                               <%}else {%>
+                                    <label>Description :</label> <input class="form-control" type="text" id="cptdescr" name="cptdescr"></input>
                                 <% } %>
                             </div>
             
-                             <div id="range-display">
+                             <div class="form-group" id="range-display">
                                 <%if(rangeFrom && rangeTo) { %>
-                                   CPT Code between : <input  type="text" id="from" name="from" value = "<%=rangeFrom%>"></input> and 
-                                    <input  type="text" id="to" name="to" value="<%=rangeTo%>"></input> 
+                                 <label>CPT Code between :</label> 
+                                 <input class="form-control" type="text" id="from" name="from" value = "<%=rangeFrom%>"></input>
+                                 <label> and </label>
+                                 <input class="form-control" type="text" id="to" name="to" value="<%=rangeTo%>"></input> 
                                <%}else {%>
-                                    CPT Code between : <input  type="text" id="from" name="from"></input> and 
-                                    <input  type="text" id="to" name="to"></input>
+                                 <label>CPT Code between :</label> <input class="form-control" type="text" id="from" name="from"></input> 
+                                 <label> and </label> 
+                                 <input class="form-control" type="text" id="to" name="to"></input>
                                 <% } %> 
                             </div> 
-
                             <button type="submit" class="btn btn-default" >Search</button>
                             
                         </form>              
                         <form id="uploadForm" action="/download" method="get">
-
-                            <input type="submit" value="Download CPT Data">
-
+                             <div class="form-group" id="code-display">
+                            <button type="submit" class="btn btn-default" >Download Data</button>
+                            </div>
                         </form>
                     </div>
 
