@@ -2,7 +2,7 @@ var	ejs = require("ejs");
 var request = require("request");
 var async = require("async");
 var drillAPI = require('../models/dataHandler');
-var client = require("../redis-client.js");
+var client = require("./redis-client.js");
 
 exports.getLoginPage = function(req, res){
     ejs.renderFile('views/register.ejs', 
@@ -67,16 +67,7 @@ exports.getLoginDetails= function(req, res){
            req.session.userid = result.data.rows[0]._id;
            req.session.firstname = result.data.rows[0].FirstName;
            req.session.company = result.data.rows[0].Company;
-           ejs.renderFile('views/searchCPT.ejs',
-                {session : req.session, code : null, isNewSearch : true},
-                function(err, result) {
-                if (!err) {
-                    res.send(result);
-                }else {
-                    res.send('An error occurred');
-                    console.log(err);
-                }
-            });	
+           res.redirect('/dashboard');
         }else
             res.send("Invalid Login Details");
     });

@@ -1,5 +1,6 @@
 var ejs = require('ejs');
 var async = require('async');
+var request = require("request");
 var drillAPI = require('../models/dataHandler');
 
 module.exports.getDashboard = function(req, res){
@@ -144,7 +145,7 @@ module.exports.getDashboard = function(req, res){
             res.send(err);
         else{
             ejs.renderFile('views/dashboard.ejs', 
-                {data : respObj},
+                {data : respObj, session: req.session},
                 function(err, result) {
                     if (!err) {
                         res.send(result);
