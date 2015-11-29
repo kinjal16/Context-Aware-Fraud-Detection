@@ -2,7 +2,7 @@ var	ejs = require("ejs");
 var drillAPI = require('../models/dataHandler');
 var json2csv = require('json2csv');
 var fs = require('fs');
-
+var request = require('request');
 
 exports.getCPTSearchPage = function(req, res){
      ejs.renderFile('views/searchCPT.ejs', 
@@ -18,7 +18,7 @@ exports.getCPTSearchPage = function(req, res){
 };
 
 exports.getCPTData = function(req, res){
-  var file = __dirname + './cptDataFile.csv';
+  var file = __dirname + '/cptDataFile.csv';
   res.download(file);
 };
 
@@ -60,7 +60,7 @@ exports.getCPTDetails = function(req, res){
             json2csv({ data: result.data.rows, fields: fields }, function(err, csv) {
               if (err) console.log(err);
               console.log(csv);
-              var file = __dirname + './cptDataFile.csv';
+              var file = __dirname + '/cptDataFile.csv';
                 console.log(file);
               fs.writeFile(file, csv, function(err) {
                 if (err) throw err;
@@ -68,7 +68,7 @@ exports.getCPTDetails = function(req, res){
               });
             }); 
            ejs.renderFile('views/searchCPT.ejs',
-                {code : code, descrCPT : descr, rangeFrom : rangeFrom, rangeTo : rangeTo, data : result.data.rows, length : result.data.rows.length, isNewSearch : false},
+                {code : code, descrCPT : descr, rangeFrom : rangeFrom, rangeTo : rangeTo, data : result.data.rows, length : result.data.rows.length, isNewSearch : false, session : req.session},
                 function(err, result) {
                 if (!err) {
                     res.send(result);
