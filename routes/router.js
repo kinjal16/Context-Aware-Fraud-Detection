@@ -1,6 +1,7 @@
 var	ejs = require("ejs");
 var cpt = require('./cptInfo');
 var login = require('./loginInfo');
+var emp = require('./employeeInfo');
 var client = require("./redis-client.js");
 var dashboard = require('./dashboard');
 var express = require('express');
@@ -36,5 +37,7 @@ var router = express.Router();
     router.post('/validateUser', login.getLoginDetails);
 
     router.get('/download', cpt.getCPTData);
+    
+    router.get('/viewEmployees', emp.getEmployeeList);
 
 module.exports = router;

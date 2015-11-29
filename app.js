@@ -41,6 +41,10 @@ client.on('connect', function() {
     console.log('Redis connected');
 });
 
+client.on('error', function (er) {
+	  console.trace('Module A') // [1]
+	  console.error(er.stack) // [2]
+});
 var server = http.createServer(app);
 
 server.listen(app.get('port'), function(){

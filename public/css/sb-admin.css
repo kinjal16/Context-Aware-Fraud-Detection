@@ -24,7 +24,8 @@ body {
 #page-wrapper {
     width: 100%;
     padding: 0;
-    background-color: #fff;
+    background-color: #f0f4f4;
+    border: 1px solid transparent;
 }
 
 .huge {
@@ -57,7 +58,7 @@ body {
     padding-top: 15px;
     padding-bottom: 15px;
     line-height: 20px;
-    color: #999;
+    color: #BDB76B;
 }
 
 .top-nav>li>a:hover,
@@ -122,7 +123,7 @@ ul.alert-dropdown {
         border: none;
         border-radius: 0;
         overflow-y: auto;
-        background-color: #222;
+        background-color: #336666;
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;

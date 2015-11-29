@@ -150,9 +150,8 @@ input {
 
 
 .btn-register {
-	margin-top: 15px;
+	margin: 5px;
 	border-radius: 50px;
-	margin-right: 10px;
 	top: 0px;
 	float: right;
 	font-size: 16px;
@@ -182,13 +181,12 @@ input {
 
 /* HEADER SECTION */
 #h {
-	background: url(/ui/images/280_c-3.jpg) no-repeat center top;
-	padding-top: 10px;
-	text-align:center;
+	background: #336666;
+	text-align: center;
 	background-attachment: relative;
 	background-position: center center;
-	min-height: 650px;
 	width: 100%;
+  	z-index: -1;
 	
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -202,10 +200,14 @@ input {
 }
 
 #h h1 {
-	color: white;
-	font-weight: 900;
-	font-size: 70px;
+	color: black;
+    font-size: 22px;
+    width: 60%;
+    float: left;
+    display: inline-block;
+	font-weight: 700;
 	letter-spacing: 5px;
+	margin: 10px;
 }
 
 #h h3 {
@@ -217,9 +219,18 @@ input {
 	padding-bottom: 0px;
 }
 
+#h::after {
+  opacity: 0.8;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
 /* White Section */
 #w {
-	height: 100%;
 	width: 100%;
 	display: block;
   	position: relative;
@@ -230,7 +241,7 @@ input {
 }
 
 #w p {
-	color: #9f9f9f;
+	color: #FFE4C4;
 	font-size: 16px;
 }
 
@@ -245,6 +256,11 @@ input {
   right: 0;
   position: absolute;
   z-index: -1;   
+}
+
+.info-blocks {
+	margin: 0px;
+	height: 650px;
 }
 
 
