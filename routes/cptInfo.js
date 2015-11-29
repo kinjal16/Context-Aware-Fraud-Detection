@@ -6,7 +6,7 @@ var request = require('request');
 
 exports.getCPTSearchPage = function(req, res){
      ejs.renderFile('views/searchCPT.ejs', 
-        {code : null, descrCPT : null, rangeFrom : null, rangeTo : null, isNewSearch : true},
+        {code : null, descrCPT : null, rangeFrom : null, rangeTo : null, isNewSearch : true, session : req.session},
         function(err, result) {
         if (!err) {
             res.send(result);
@@ -48,7 +48,7 @@ exports.getCPTDetails = function(req, res){
         case 'codeRange' :
             rangeFrom = req.query.from;
             rangeTo = req.query.to;
-            jsonObject.query = "select * from mongo.master.`cpt` where `CPT` between " + rangeFrom + " and " + rangeTo ;
+            jsonObject.query = "select * from mongo.master.`cpt` where `CPT` between '" + rangeFrom + "' and '" + rangeTo + "'" ;
             break;
             
     }
