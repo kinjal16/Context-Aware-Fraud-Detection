@@ -2,7 +2,11 @@ var	ejs = require("ejs");
 var drillAPI = require('../models/dataHandler');
 var json2csv = require('json2csv');
 var fs = require('fs');
+<<<<<<< HEAD
 var request = require('request');
+=======
+
+>>>>>>> fee1b4e076edf8f2d62dd46ee1d8a40721c2c32d
 
 exports.getCPTSearchPage = function(req, res){
      ejs.renderFile('views/searchCPT.ejs', 
@@ -18,7 +22,11 @@ exports.getCPTSearchPage = function(req, res){
 };
 
 exports.getCPTData = function(req, res){
+<<<<<<< HEAD
   var file = __dirname + '/cptDataFile.csv';
+=======
+  var file = __dirname + './cptDataFile.csv';
+>>>>>>> fee1b4e076edf8f2d62dd46ee1d8a40721c2c32d
   res.download(file);
 };
 
@@ -60,7 +68,11 @@ exports.getCPTDetails = function(req, res){
             json2csv({ data: result.data.rows, fields: fields }, function(err, csv) {
               if (err) console.log(err);
               console.log(csv);
+<<<<<<< HEAD
               var file = __dirname + '/cptDataFile.csv';
+=======
+              var file = __dirname + './cptDataFile.csv';
+>>>>>>> fee1b4e076edf8f2d62dd46ee1d8a40721c2c32d
                 console.log(file);
               fs.writeFile(file, csv, function(err) {
                 if (err) throw err;
