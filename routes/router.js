@@ -8,6 +8,8 @@ var express = require('express');
 var path = require('path');
 var handler = require('./handlers');
 var validate = require('./validate');
+var admin = require('./admin');
+var cptAdmin = require('./cptAdmin');
 var router = express.Router();
 
 //module.exports = function(app){
@@ -51,6 +53,16 @@ var router = express.Router();
 
     router.get('/viewClaims', validate.validateSession, dashboard.getFraudClaims );
 
-    router.get('/claimsByDateRange', dashboard.getClaimsByDate);
+    router.get('/claimsByDateRange',  validate.validateSession, dashboard.getClaimsByDate);
+    
+    router.get('/cptUpload',admin.getCPTUpload);
+
+    router.post('/cptUpload', admin.uploadCPTData);
+
+    router.get('/searchCPTAdmin', cptAdmin.getCPTSearchPage);
+
+    router.get('/searchCPTByCodeAdmin', cptAdmin.getCPTDetails);
+
+    router.post('/deleteCPT', cptAdmin.deleteCPT);
 
 module.exports = router;
