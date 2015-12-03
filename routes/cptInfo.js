@@ -5,8 +5,15 @@ var fs = require('fs');
 var request = require('request');
 
 exports.getCPTSearchPage = function(req, res){
+    var isLoggedIn = false;
+    if(req.session.company)
+        isLoggedIn = true;
+    else
+        isLoggedIn = false;
+    
+    console.log(isLoggedIn + "session:" + req.session);
      ejs.renderFile('views/searchCPT.ejs', 
-        {code : null, descrCPT : null, rangeFrom : null, rangeTo : null, isNewSearch : true, session : req.session},
+        {code : null, descrCPT : null, rangeFrom : null, rangeTo : null, isNewSearch : true, session : req.session, isLoggedIn : isLoggedIn},
         function(err, result) {
         if (!err) {
             res.send(result);
@@ -34,6 +41,11 @@ exports.getCPTDetails = function(req, res){
     var rangeFrom = null;
     var rangeTo = null;
     var fields = ['CPT', 'Description', 'Cost'];
+     var isLoggedIn = false;
+    if(req.session)
+        isLoggedIn = true;
+    else
+        isLoggedIn = false;
     jsonObject.queryType = 'SQL';
     console.log(option);
     switch(option){
@@ -72,7 +84,7 @@ exports.getCPTDetails = function(req, res){
               });
             }); 
            ejs.renderFile('views/searchCPT.ejs',
-                {code : code, descrCPT : descr, rangeFrom : rangeFrom, rangeTo : rangeTo, data : result.data.rows, length : result.data.rows.length, isNewSearch : false, session : req.session},
+                {code : code, descrCPT : descr, rangeFrom : rangeFrom, rangeTo : rangeTo, data : result.data.rows, length : result.data.rows.length, isNewSearch : false, session : req.session, isLoggedIn : isLoggedIn},
                 function(err, result) {
                 if (!err) {
                     res.send(result);

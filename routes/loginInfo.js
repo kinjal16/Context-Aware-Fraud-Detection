@@ -64,10 +64,14 @@ exports.getLoginDetails= function(req, res){
     params.body = jsonObject;
     drillAPI.requestDrillAPI(params, function(result){
         if(result){
-           req.session.userid = result.data.rows[0]._id;
-           req.session.firstname = result.data.rows[0].FirstName;
-           req.session.company = result.data.rows[0].Company;
-           res.redirect('/dashboard');
+            if(result.data.rows){
+               req.session.userid = result.data.rows[0]._id;
+               req.session.firstname = result.data.rows[0].FirstName;
+               req.session.company = result.data.rows[0].Company;
+               res.redirect('/dashboard');
+            }else
+                res.send("Unable to get data from Drill");
+            
         }else
             res.send("Invalid Login Details");
     });

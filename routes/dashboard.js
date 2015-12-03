@@ -11,6 +11,7 @@ module.exports.getDashboard = function(req, res){
         console.log(company);
         async.series([
             function(callback){
+                
                         var jsonObject = {};
                         var params = {};
                         jsonObject.queryType = 'SQL';
@@ -57,8 +58,6 @@ module.exports.getDashboard = function(req, res){
                 }); 
             },
             function(callback){
-                async.series([
-                    function(callback){
                         exports.getFraudCount(company, function(err,result){
                             if(err)
                                 callback(err);
@@ -147,14 +146,7 @@ module.exports.getDashboard = function(req, res){
                                 callback();
                             }                            
                         });                  
-                    }
-                ], function(err){
-                        if(err)
-                            callback(err);
-                        else
-                            callback();
-                });
-            }
+                    }   
         ],function(err){
             if(err)
                 res.send(err);
@@ -182,6 +174,8 @@ exports.getFraudCount = function(company, callback){
     var fraudCPTList = [];
     var currMonthFraud = [];
     var cptJson = {};
+    var claimData = [];
+   
     var employeeFraudClaim = {};
     var monthlyFraud = [0,0,0,0,0,0,0,0,0,0,0,0];
     var monthlyClaim = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -216,6 +210,7 @@ exports.getFraudCount = function(company, callback){
                 if(respObj.cptData){   
 
                     async.forEach(respObj.cptData, function(item, callback){ 
+                         var claimDetails = {};
                         var isCurrMonth = false;
                         var costData = JSON.parse(item.cpt);
                         var isFraud = false;
@@ -273,9 +268,17 @@ exports.getFraudCount = function(company, callback){
                                             employeeFraudClaim[item.employeeId] = employeeFraudClaim[item.employeeId] + 1;
                                         else
                                             employeeFraudClaim[item.employeeId] = 1;
-
+                                        
+                                       // claimDetails.data = item;
+                                        //claimDetails.isFraud = true;
+                                        claimData.push({data : item, isFraud : true});
+                                                                                
                                         if(isCurrMonth)
                                             currMonthFraud.push(item);
+                                    }else{
+                                       // claimDetails.data = item;
+                                        //claimDetails.isFraud = false;
+                                        claimData.push({data : item, isFraud : false});
                                     }
 
                                     callback();
@@ -292,6 +295,8 @@ exports.getFraudCount = function(company, callback){
                             respObj.monthlyClaim = monthlyClaim;
                             respObj.monthlyFraud = monthlyFraud; 
                             respObj.employeeFraudClaim = employeeFraudClaim;
+                            respObj.claimData = claimData;
+                          
                             callback();
                         }                        
                     });              
@@ -317,3 +322,92 @@ exports.sortData = function(data) {
     return sorted;
 };
 
+exports.getFraudClaims = function(req,res){
+
+    var respObj={};
+
+    exports.getFraudCount(req.session.company,function(err,result){
+
+            if(err)
+
+               res.send(err);
+
+            else{          
+
+                respObj.claimData = result.claimData;
+
+                console.log(respObj.claimData);
+                ejs.renderFile('views/viewFraudClaims.ejs', 
+
+                        {data : respObj, session: req.session},
+
+                        function(err, result) {
+
+                            if (!err) {
+
+                                res.send(result);
+
+                            }else {
+
+                                res.send('An error occurred');
+
+                                console.log(err);
+
+                            }
+
+                    });
+
+            }                    
+
+        });
+};
+
+exports.getClaimsByDate = function(req, res){
+     var respObj={};
+    respObj.claimData = [];
+    var fdate = new Date(req.query.fdate);
+    var tdate = new Date(req.query.tdate);
+     exports.getFraudCount(req.session.company,function(err,result){
+            if(err)
+               res.send(err);
+            else{          
+                async.forEach(result.claimData, function(item, callback){
+                    var billdate = new Date(item.data.billdate);
+                    if(fdate <= billdate && tdate >= billdate){
+                        respObj.claimData.push(item);
+                        callback();
+                    }else
+                        callback();
+                }, function(err){
+                    if(err)
+                        res.send(err);
+                    else{
+                                                 
+                            ejs.renderFile('views/viewFraudClaims.ejs', 
+
+                            {data : respObj, session: req.session},
+
+                            function(err, result) {
+
+                                if (!err) {
+
+                                    res.send(result);
+
+                                }else {
+
+                                    res.send('An error occurred');
+
+                                    console.log(err);
+
+                                }
+
+                        });
+
+                    }
+                        
+                });       
+                
+            }                    
+
+        });
+};

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+
+    <meta name="author" content="">
+
+    <title>SB Admin - Bootstrap Admin Template</title>
+
+
+
+    <!-- Bootstrap Core CSS -->
+
+    <link href="/ui/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+    <!-- Custom CSS -->
+
+    <link href="/ui/css/sb-admin.css" rel="stylesheet">
+
+
+
+    <!-- Custom Fonts -->
+
+    <link href="/ui/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+    <!--[if lt IE 9]>
+
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/proj4js/2.2.2/proj4.js"></script>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+<script src="/ui/js/modernizr.js"></script>
+
+</head>
+
+
+
+<body>
+
+
+
+    <div id="wrapper">
+
+        <% include SideBar.ejs %>
+
+        <!-- Navigation -->
+
+        <div id="page-wrapper">
+
+
+
+            <div class="container-fluid">
+
+
+
+                <!-- Page Heading -->
+
+                <div class="row">
+
+                    <div class="col-lg-12">
+
+                        <h1 class="page-header">
+
+                            Employee Bill Information
+
+                        </h1>
+
+                        <ol class="breadcrumb">
+
+                            <li>
+
+                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+
+                            </li>
+
+                            <li class="active">
+
+                                <i class="fa fa-edit"></i> Employee Bill Information
+
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+                </div>
+
+                <!-- /.row -->
+
+                <div class="row">
+
+                    <div class="col-lg-6">
+
+
+
+                        <form role="form" action="/uploadEmployeeBillInfo" method="post">
+
+
+
+                            <div class="form-group">
+
+                                <label for="billNo">Bill Number</label>
+
+                                <input type="text" class="form-control" required x-moz-errormessage="billNo" name="billNo" id="bill_No"  
+
+                               value="" placeholder="Enter billNo"/>
+
+                                
+
+                            </div>
+
+
+<div class="form-group">
+
+                              <label for="Employee_ID">Employee ID#</label>
+
+              <input type="text" required x-moz-errormessage="Enter Employee ID" 
+
+              name="employeeId" id="Employee_ID" class="form-control" 
+
+              value="" placeholder="Enter Employee ID" pattern="[a-z A-Z]*[0-9]*" 
+
+              title="Enter EmployeeID" required>
+
+                            </div>
+
+                            <div class="form-group">
+
+                              <label for="billDate">Bill Date</label>
+
+                <input type='date' name="billDate" id="billDate" class="form-control" 
+
+                value="" required/>
+
+							<div class="form-group">
+                                <label for="employeeID">Company</label>
+                                <input type="text" class="form-control" required x-moz-errormessage="company" name="company" id="company"  
+                               value="" placeholder="Enter Company Name" pattern="[a-z A-Z]*[0-9]*" 
+                               title="Enter Company ID" />
+                                
+                            </div>
+							
+                            </div>
+
+								<div class="form-group">
+									<label for="example">Enter CPT codes and claims</label>
+<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Claim</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <td><input type="text" id="row-1-code" name="row-1-code" value=""></td>
+                <td><input type="text" id="row-1-claim" name="row-1-claim" value=""></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="row-2-code" name="row-2-code" value=""></td>
+                <td><input type="text" id="row-2-claim" name="row-2-claim" value=""></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="row-3-code" name="row-3-code" value=""></td>
+                <td><input type="text" id="row-3-claim" name="row-3-claim" value=""></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="row-4-code" name="row-4-code" value=""></td>
+                <td><input type="text" id="row-4-claim" name="row-4-claim" value=""></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="row-5-code" name="row-5-code" value=""></td>
+                <td><input type="text" id="row-5-claim" name="row-5-claim" value=""></td>
+            </tr>
+            
+        </tbody>
+</table>
+								</div>
+							
+
+                            <button type="submit" class="btn btn-default">Submit Button</button>
+
+                            <button type="reset" class="btn btn-default">Reset Button</button>
+
+
+
+                        </form>
+
+                    </div>
+
+                   
+
+                </div>
+
+                <!-- /.row -->
+
+
+
+            </div>
+
+            <!-- /.container-fluid -->
+
+
+
+        </div>
+
+        <!-- /#page-wrapper -->
+
+
+
+    </div>
+
+    <!-- /#wrapper -->
+
+
+
+    <!-- jQuery -->
+
+    <script src="/ui/js/jquery.js"></script>
+
+
+
+    <!-- Bootstrap Core JavaScript -->
+
+    <script src="/ui/js/bootstrap.min.js"></script>
+
+
+
+<script type="text/javascript">
+
+
+
+function showList() 
+
+{ 
+
+document.getElementById("dropdown").style.display = "none"; // Div tag containing the dropdown list is hidden 
+
+document.getElementById('listbox1').options.length = 0; // If already shown list box, the options are made to 0, which makes it hidden 
+
+if(!((/^\s*$/).test(document.getElementById("diagnosis").value)))	// Checks if white space is entered in edit box 
+
+{ 
+
+document.getElementById("dropdown").style.display="block";	// Makes drop down visible 
+
+var textBoxString = document.getElementById("diagnosis").value; 
+
+
+	if (Modernizr.localstorage) {
+	localStorage.setItem("diagnosisDescription",JSON.stringify(diagnosisDescription));
+	}
+	else{
+	console.log("Browser doesn't support local storage");
+	}
+
+
+for(var i = 0; i< diagnosisDescription.length; i += 1) 
+
+{ 
+
+var j = j + 1; 
+
+if(diagnosisDescription[i].indexOf(textBoxString) != -1)	// Checks if search text is like in source string 
+
+{ 
+
+addItem(diagnosisDescription[i],diagnosisDescription[i]);	// Function to populate drop down 
+
+} 
+
+} 
+
+} 
+
+} 
+
+
+
+function addItem(Text,Value) 
+
+{ 
+
+// Create an Option object 
+
+var opt = document.createElement("option"); // Add an Option object to Drop Down/List Box 
+
+document.getElementById("listbox1").options.add(opt); // Assign text and value to Option object 
+
+opt.text = Text; 
+
+opt.value = Value; 
+
+} 
+
+
+
+
+
+function selVal(listval) 
+
+{ 
+
+document.getElementById("diagnosis").value = listval.value; // Value shown in list box to shown in edit box 
+
+document.getElementById("dropdown").style.display = "none";
+
+} 
+
+</script>
+
+
+
+<script src="/ui/js/bootstrap.min.js"></script>
+
+</body>
+
+
+
+</html>

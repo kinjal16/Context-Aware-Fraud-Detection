@@ -1,7 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
- <%@ page import="cmpe280.connections.*" %>
- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,20 +15,20 @@
 	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-	<link rel="stylesheet" href="../css/custom.css">
+	<link rel="stylesheet" href="/ui/css/custom.css">
     <title>Context-Aware Fraud Detection</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="/ui/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../css/sb-admin.css" rel="stylesheet">
+    <link href="/ui/css/sb-admin.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/ui/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- DataTables CSS -->
-	<link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/ui/css/dataTables.bootstrap.css">
 	
 	<script>
 	  $(document).ready( function () {
@@ -78,19 +74,20 @@ function googleTranslateElementInit() {
                              <div id="container1" style="min-width: 110px; height: auto; margin: 0 auto">
                              
                              <div id="tab1">
-                             <%if(session.getAttribute("empList") != null){ %>
+                             <%if (data != undefined) { %>
                              
                              <table id="details" class="table table-striped table-bordered">
                              	<thead><tr><th>Employee Name</th><th>Bill Number</th><th></th></tr></thead>
 								<tbody>
-									<%EmployeeBean[] employeesList = (EmployeeBean[])session.getAttribute("empList");
-									 for(int i=0; i< employeesList.length; i++){ %>
-										<tr><td><%=employeesList[i].getFirstName() %> <%=employeesList[i].getLastName() %></td>
-										<td><%=employeesList[i].getBillNo() %></td> 
-										<td><%if(employeesList[i].isFraudulent()){%>
-											<a href="#" id="billNo:<%=employeesList[i].getBillNo() %>,diagnosis:<%=employeesList[i].getDescr() %>,actualCost:<%=employeesList[i].getAcost() %>,billAmt:<%=employeesList[i].getBillAmt() %>">
-											<img src="../images/red-flag.png" class="redFlag" data-toggle="modal" data-target="#myModal"> 
-											</a>
+									<% for(var row in data) { %>
+										<tr><td><%= data[row].firstname %> <%= data[row].lastname %></td>
+										<td><%= data[row].billno %></td> 
+										<td><% if(data[row].fraud) { %>
+											<% for(var cpt in data[row].cptData) { %>
+												<a href="#" id="billNo:<%= data[row].billno %>,diagnosis:<%= data[row].cptData[cpt].descr %>,actualCost:<%= data[row].cptData[cpt].actualCost %>,billAmt:<%= data[row].cptData[cpt].claim %>">
+												<img src="/ui/images/red-flag.png" class="redFlag" data-toggle="modal" data-target="#myModal"> 
+												</a>
+											<% } %>
 										<% } %>
 										</td>
 										</tr>																			
@@ -98,11 +95,7 @@ function googleTranslateElementInit() {
 										
 								</tbody>
 								</table>
-								<%}
-                             	if(session.getAttribute("empList") != null){
-                             		session.removeAttribute("empList");
-                             	}
-								%>
+							<%} %>
                              </div>
                             
                              </div>
@@ -127,7 +120,7 @@ function googleTranslateElementInit() {
   <!--   <script src="js/jquery.js"></script>--> 
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="/ui/js/bootstrap.min.js"></script>
 
 	
     
