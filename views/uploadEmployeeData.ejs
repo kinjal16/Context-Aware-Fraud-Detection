@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Upload Employee Data</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/ui/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/ui/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/ui/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+   
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <% include SideBar.ejs %>
+        <!-- Navigation -->
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Employee Details
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="">Dashboard</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-edit"></i> Employee Data
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <form role="form" action="/uploadEmployeeData" method="post">
+							<div class="form-group">
+                                <label for="employeeID">Company</label>
+                                <input type="text" class="form-control" required x-moz-errormessage="company" name="company" id="company"  
+                               value="" placeholder="Enter Company Name" pattern="[a-z A-Z]*[0-9]*" 
+                               title="Enter Company ID" />
+                                
+                            </div>
+							<div class="form-group">
+                                <label for="employeeID">Employee ID</label>
+                                <input type="text" class="form-control" required x-moz-errormessage="employeeID" name="employeeID" id="employeeID"  
+                               value="" placeholder="Enter employee ID" pattern="[a-z A-Z]*[0-9]*" 
+                               title="Enter Employee ID" />
+                                
+                            </div>
+                            <div class="form-group">
+                                <label for="First_name">First Name</label>
+                                <input type="text" class="form-control" required x-moz-errormessage="Enter First Name" name="firstName" id="FirstName"  
+                               value="" placeholder="Enter first name" pattern="[a-z A-Z]*"
+                               title="First name should not contain numbers"/>
+                                
+                            </div>
+							
+							<div class="form-group">
+                              <label for="Last_name">Last Name</label>
+				              <input type="text" required x-moz-errormessage="Enter Last Name" 
+				              name="lastName" id="Lastname" class="form-control" 
+				              value="" placeholder="Enter last name" pattern="[a-z A-Z]*"
+				              title="Last name should not contain numbers">
+                            </div>
+                            <div class="form-group">
+                              <label for="email">Email</label>
+			                	<input type='email' name="email" required id="email" class="form-control" 
+			                	value="" placeholder="jane.doe@example.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+			                	title="jane.doe@example.com"/>
+
+                            </div>
+
+                            <div class="form-group">
+					           <label for="phone">Phone</label>
+					            <input type="text" name="phone" required 
+					            pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}" title="###-##-####" class="form-control"/>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="departmentName">Department Name</label>
+			                	<input type='text' name="departmentName" id="departmentName" class="form-control" 
+			                	value="" pattern="[a-zA-Z]*[0-9]*" required/>
+
+                            </div>
+							<div class="form-group">
+                              <label for="address">Address</label>
+			                	<input type='text' name="address" id="Address" class="form-control" 
+			                	value="" required/>
+
+                            </div>
+                            <div class="form-group">
+                              <label for="city">City</label>
+			                	<input type='text' name="city" id="city" class="form-control" 
+			                	value="" pattern="[a-z A-Z]*" required/>
+
+                            </div>
+                             <div class="form-group">
+                              <label for="state">State</label>
+			                	<input type='text' name="state" id="state" class="form-control" 
+			                	value="" pattern="[a-z A-Z]*" required/>
+
+                            </div>
+                            <div class="form-group">
+                              <label for="Country">Country</label>
+			                	<input type='text' name="country" id="country" class="form-control" 
+			                	value="" pattern="[a-z A-Z]*" required/>
+
+                            </div>
+                            <div class="form-group">
+                              <label for="postal">Postal</label>
+			                	<input type='text' name="postal" id="postal" class="form-control" 
+			                	value="" pattern="[0-9]{5,}" title="Five or more digits" required/>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-default">Submit Button</button>
+                            <button type="reset" class="btn btn-default">Reset Button</button>
+
+                        </form>
+
+                    </div>
+                   
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

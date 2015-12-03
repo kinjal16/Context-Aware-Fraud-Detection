@@ -59,8 +59,10 @@
 
     <div id="wrapper">
         <!-- Navigation -->
-		
-        <% include SideBar.ejs %>
+		<% if(isLoggedIn === true){ %>
+             <% include SideBar.ejs %>
+        <%}%>
+       
         <div id="page-wrapper">
             <div class="container-fluid">
 

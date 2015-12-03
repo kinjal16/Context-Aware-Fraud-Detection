@@ -36,32 +36,31 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>   
                      <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Upload Data <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="uploadEmployeeData.jsp">Employee Data</a>
+                                <a href="/employeeDetails">Employee Info</a>
                             </li>
                             <li>
-                                <a href="#" onclick="checkLocalStorage();" id="employeeBill">Employee Bill Info</a>
+                                <a href="/employeeBillDetails" onclick="checkLocalStorage();" id="employeeBill">Employee Claim Info</a>
                             </li>
-
+                            <li>
+                                <a href="#" onclick="checkLocalStorage();" id="employeeBill">Employee Claim Image Upload</a>
+                            </li>
                         </ul>
                     </li>                 
                     <li class="active">
-                        <a href="viewEmployees"><i class="fa fa-fw fa-file"></i>View Employees</a>
+                        <a href="/viewEmployees"><i class="fa fa-fw fa-file"></i>View Employees</a>
+                    </li>   
+                     <li class="active">
+                        <a href="/viewClaims"><i class="fa fa-fw fa-file"></i>View Fraud Claims</a>
+                    </li>  
+                     <li class="active">
+                        <a href="/searchCPT"><i class="fa fa-fw fa-file"></i>Search CPT Details</a>
                     </li>
-                    
-                    <li class="active">
-                        <a href="FraudByRange.jsp"><i class="fa fa-fw fa-bar-chart-o"></i>View Fraud By Date</a>
-                    </li> 
-                    <li class="active">
-                        <a href="FraudMap"><i class="fa fa-fw fa-bar-chart-o"></i>View Fraud by Location</a>
-                    </li> 
-                   
-                                   
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
