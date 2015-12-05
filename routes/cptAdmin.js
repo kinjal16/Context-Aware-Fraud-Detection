@@ -4,7 +4,7 @@ var json2csv = require('json2csv');
 var fs = require('fs');
 var request = require('request');
 var monk = require('monk');
-var db = monk('52.33.120.205:27017/master');
+var db = monk(CONFIG_FILE.monk.path);
 
 exports.getCPTSearchPage = function(req, res){
     
