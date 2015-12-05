@@ -11,6 +11,7 @@ var validate = require('./validate');
 var admin = require('./admin');
 var cptAdmin = require('./cptAdmin');
 var router = express.Router();
+var ocr = require('./ocr');
 
 //module.exports = function(app){
 
@@ -68,5 +69,13 @@ var router = express.Router();
     router.post('/deleteCPT', cptAdmin.deleteCPT);
 
     router.post('/uploadCPTJson',admin.uploadCPTJson);
+    
+    router.post('/uploadBillJson',handler.uploadEmployeeBillJson);
 
+    router.post('/uploadEmployeelDatajson',handler.uploadEmployeeDataJson);
+    
+    router.post('/detectFraud', ocr.getOCRFraudDetails);
+    
+    router.get('/uploadImage',ocr.imageUploadPage);
+    
 module.exports = router;

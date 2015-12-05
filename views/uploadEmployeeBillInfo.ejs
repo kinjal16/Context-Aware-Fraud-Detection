@@ -36,7 +36,7 @@
 
     <link href="/ui/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-
+	<link href="/ui/css/style.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -57,6 +57,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 
 <script src="/ui/js/modernizr.js"></script>
+
+
 
 </head>
 
@@ -118,7 +120,24 @@
 
                     <div class="col-lg-6">
 
+		<form id="uploadBillJson" enctype="multipart/form-data" action="/uploadBillJson" method="post">
+     		
+     		<span class="btn btn-success fileinput-button add-file-block">
+                    <i class="glyphicon glyphicon-plus plus"></i>
+                    <span class="add-file">Add files...</span>
+                   <input type="file" id="uploadEmployeeBillJson" name="uploadEmployeeBillJson" onchange="readURL(this);"/>
+                </span>
 
+     			 <button type="submit" class="btn btn-primary start upload-button">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Upload Employee Bill</span>
+                </button>
+                
+                <br>
+                <p style="margin:20px 0 0 150px"><img id="uploadPic" src="" alt="" /></p>
+	</form>
+	
+	
 
                         <form role="form" action="/uploadEmployeeBillInfo" method="post">
 
@@ -336,8 +355,24 @@ document.getElementById("dropdown").style.display = "none";
 } 
 
 </script>
+<script> 
+	 function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
+                reader.onload = function (e) {
+                    $('#uploadPic')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
 
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+	</script>
+	<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 
 <script src="/ui/js/bootstrap.min.js"></script>
 
