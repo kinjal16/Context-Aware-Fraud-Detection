@@ -9,6 +9,7 @@ var path = require('path');
 var handler = require('./handlers');
 var validate = require('./validate');
 var router = express.Router();
+var ocr = require('./ocr');
 
 //module.exports = function(app){
 
@@ -52,5 +53,14 @@ var router = express.Router();
     router.get('/viewClaims', validate.validateSession, dashboard.getFraudClaims );
 
     router.get('/claimsByDateRange', dashboard.getClaimsByDate);
+    
+    router.post('/uploadBillJson',handler.uploadEmployeeBillJson);
+
+    router.post('/uploadEmployeelDatajson',handler.uploadEmployeeDataJson);
+    
+    router.post('/detectFraud', ocr.getOCRFraudDetails);
+    
+    router.get('/uploadImage',ocr.imageUploadPage);
+    
 
 module.exports = router;

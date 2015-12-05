@@ -73,3 +73,118 @@ exports.uploadEmployeeBillInfoHandler = function(req, res){
 	collection.insert(info);
     exports.getEmployeeBillDetailsPage(req, res);
 };
+
+var fs = require('fs');
+var async = require('async');
+exports.uploadEmployeeBillJson = function(req,res){
+	var collection = db.get('employee_claim');
+	console.log("uploadEmployeeBillJson called");
+	console.log(req);
+	var serverPath = '/uploadedFiles/' + req.files.uploadEmployeeBillJson.name;
+	console.log("server path");
+    //console.log(__dirname+serverPath);
+    var pathName=__dirname+serverPath;
+    console.log(pathName);
+//    async.series([
+//                  function(callback){
+//                	  require('fs').rename(req.files.uploadEmployeeBillJson.path,pathName,
+//          			        function(error) {
+//          			            //res.contentType('text/plain');
+//          			
+//          			            if(error) {
+//          			                callback('Ah! Something bad happened');
+//          			                
+//          			            }
+//          			            else{	
+//          			            	fs.readFile(__dirname+serverPath,'utf8', function (err, data) {
+//          			            		if (err) 
+//          			            			callback(err);
+//          			            		console.log(data);
+//          			            		try{
+//          			            	var json = JSON.parse(data);
+//          			            	//collection.insert(json);
+//          			            		}catch(e){
+//          			            			console.log("inside catch");
+//          			            		}
+//          			            		console.log(json);
+//          			            		callback();
+//          			            	});
+//          			          }
+//  			        });
+//
+//                  }
+//                  
+//                  ],function(err){
+//    				if(!err){
+//    					exports.getEmployeeBillDetailsPage(req, res);
+//    				}else
+//    					console.log(err);
+//    				
+//    					
+//    	
+//    });
+    require('fs').rename(req.files.uploadEmployeeBillJson.path,pathName,
+			        function(error) {
+			
+			            if(error) {
+			                res.send(JSON.stringify({
+			                    error: 'Ah! Something bad happened'
+			                }));
+			                return;
+			            }
+			            else{	
+			            	fs.readFile(__dirname+serverPath,'utf8', function (err, data) {
+			            		if (err) throw err;
+			            		console.log(data);
+			            		try{
+			            	var json = JSON.parse(data);
+			            	//collection.insert(json);
+			            		}catch(e){
+			            			console.log("inside catch");
+			            		}
+			            		console.log(json);
+			            	});
+			            	 //res.send({msg:"hello"});
+			            	exports.getEmployeeBillDetailsPage(req, res); 
+			            }
+			        });
+	        
+};
+
+exports.uploadEmployeeDataJson = function(req,res){
+	var collection = db.get('employee');
+	console.log("uploadEmployeeBillJson called");
+	console.log(req);
+	var serverPath = '/uploadedFiles/' + req.files.uploadEmployeeDataJson.name;
+	console.log("server path");
+    //console.log(__dirname+serverPath);
+    var pathName=__dirname+serverPath;
+    console.log(pathName);
+    require('fs').rename(req.files.uploadEmployeeBillJson.path,pathName,
+	        function(error) {
+	
+	            if(error) {
+	                res.send(JSON.stringify({
+	                    error: 'Ah! Something bad happened'
+	                }));
+	                return;
+	            }
+	            else{	
+	            	fs.readFile(__dirname+serverPath,'utf8', function (err, data) {
+	            		if (err) throw err;
+	            		console.log(data);
+	            		try{
+	            	var json = JSON.parse(data);
+	            	//collection.insert(json);
+	            		}catch(e){
+	            			console.log("inside catch");
+	            		}
+	            		console.log(json);
+	            	});
+	            	 //res.send({msg:"hello"});
+	            	exports.getEmployeeDetailsPage(req, res);
+	            }
+	        });
+    
+	        
+};
