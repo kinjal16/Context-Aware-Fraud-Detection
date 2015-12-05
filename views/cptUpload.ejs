@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CPT Data Upload</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/ui/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/ui/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/ui/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+   
+</head>
+
+<body>
+
+    <div id="wrapper">
+       
+        <!-- Navigation -->
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            CPT Upload
+                        </h1>                       
+                    </div>
+                   
+                </div>
+                <% if(uploadSuccess){ %>
+                    <div class="alert alert-success" role="alert">
+                      <strong>Data Uploaded Successfully!</strong>
+                    </div>
+                <%}%>
+                 <% if(duplicate){ %>
+                    <div class="alert alert-warning" role="alert">
+                      <strong>CPT Data already Exists!</strong>
+                    </div>
+                <%}%>
+                 <% if(error){ %>
+                    <div class="alert alert-danger" role="alert">
+                      <strong>Could not upload data!</strong>
+                    </div>
+                <%}%>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form id="uploadCPTData" enctype="multipart/form-data" action="/uploadCPTJson" method="post">
+                            <span class="btn btn-success fileinput-button">
+                               <input type="file" id="uploadCPT" name="uploadCPT" />
+                            </span>
+                            <button type="submit" class="btn btn-primary start">
+                                <i class="glyphicon glyphicon-upload"></i>
+                                <span>Upload CPT Data</span>
+                            </button>
+                            <br>
+                            <p style="margin:20px 0 0 150px"><img id="uploadPic" src="" alt="" /></p>
+                        </form>
+                        <form role="form" action="/cptUpload" method="post">
+							<div class="form-group">
+                                <label for="cpt">CPT Code</label>
+                                <input type="text" class="form-control" required x-moz-errormessage="cpt" name="cpt" id="cpt"  
+                               value="" placeholder="Enter CPT Code" pattern="[a-z A-Z]*[0-9]*" 
+                               title="Enter CPT Code" />
+                                
+                            </div>
+							<div class="form-group">
+                                <label for="descr">Code Description</label>
+                                <input type="text" class="form-control" required x-moz-errormessage="descr" name="descr" id="descr"  
+                               value="" placeholder="Enter Code Description" title="Enter Code Description" />
+                                
+                            </div>
+                            <div class="form-group">
+                                <label for="Cost">Cost</label>
+                                <input type="text" class="form-control" required x-moz-errormessage="cost" name="cost" id="cost"  
+                               value="" placeholder="Enter Cost" pattern="\d+(\.\d{2})?"
+                               title="Enter Cost"/>
+                                
+                            </div>
+							
+                            <button type="submit" class="btn btn-default">Submit Button</button>
+                            <button type="reset" class="btn btn-default">Reset Button</button>
+
+                        </form>
+
+                    </div>
+                   
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="/ui/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/ui/js/bootstrap.min.js"></script>
+   
+</body>
+
+</html>

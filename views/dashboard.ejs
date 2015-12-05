@@ -277,18 +277,33 @@ $(document).ready(function(){
                                             <tbody>
                                                 <% if(data){
                                                     if(data.currMonthFraud){
+                                                        var count = 0;
+                                                        var isMore = false;
                                                         for(var rows in data.currMonthFraud){ %>
+                                                            <%count = count + 1;
+                                                            if(count <= 5){%>
                                                             <tr>
                                                                 <td><%=data.currMonthFraud[rows].FirstName%>
                                                                     <%=data.currMonthFraud[rows].LastName%></td>
                                                                 <td><%=data.currMonthFraud[rows].billno%></td>
-                                                                <td><%=data.currMonthFraud[rows].billdate%></td>                                                    
-                                                            </tr>                                                
-                                                        <%}
-                                                    }                
+                                                                <td><%=data.currMonthFraud[rows].billdate%></td>                             
+                                                            </tr>          
+                                                            <%}else{%>
+                                                                isMore = true;
+                                                            <%}%>
+                                                        <%} %>
+                                                      
+                                                 <%   }                
                                                 }%>                          
                                             </tbody>
                                         </table>
+                                         <% if(isMore){%>
+                                                            <a href="/viewClaims">
+                                                                <div class="panel-footer">
+                                                                    <span class="pull-right">View More</span>                     
+                                                                </div>
+                                                            </a>
+                                                      <%  } %>
                                     </div>   
                             </div>
                         </div>

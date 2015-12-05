@@ -2,6 +2,8 @@ var ejs = require('ejs');
 var async = require('async');
 var request = require("request");
 var drillAPI = require('../models/dataHandler');
+var json2csv = require('json2csv');
+var fs = require('fs');
 
 module.exports.getDashboard = function(req, res){
     var respObj = {};
@@ -323,48 +325,44 @@ exports.sortData = function(data) {
 };
 
 exports.getFraudClaims = function(req,res){
-
     var respObj={};
-
+    var fields = ['data', 'isFraud'];
+    
     exports.getFraudCount(req.session.company,function(err,result){
-
             if(err)
-
                res.send(err);
-
             else{          
-
                 respObj.claimData = result.claimData;
+                
+                 json2csv({ data: result.claimData, fields: fields }, function(err, csv) {
+                  if (err) console.log(err);
+                
+                  var file = __dirname + '/claimsDataFile.csv';
 
-                console.log(respObj.claimData);
-                ejs.renderFile('views/viewFraudClaims.ejs', 
-
+                   fs.writeFile(file, csv, function(err) {
+                    if (err) throw err;
+                    console.log('file saved');   
+                        ejs.renderFile('views/viewFraudClaims.ejs', 
                         {data : respObj, session: req.session},
-
                         function(err, result) {
-
                             if (!err) {
-
                                 res.send(result);
-
                             }else {
-
                                 res.send('An error occurred');
-
                                 console.log(err);
-
                             }
-
                     });
-
+                  });
+                }); 
+               
             }                    
-
         });
 };
 
 exports.getClaimsByDate = function(req, res){
      var respObj={};
     respObj.claimData = [];
+    var fields = ['data', 'isFraud'];
     var fdate = new Date(req.query.fdate);
     var tdate = new Date(req.query.tdate);
      exports.getFraudCount(req.session.company,function(err,result){
@@ -382,27 +380,26 @@ exports.getClaimsByDate = function(req, res){
                     if(err)
                         res.send(err);
                     else{
-                                                 
-                            ejs.renderFile('views/viewFraudClaims.ejs', 
+                            json2csv({ data: respObj.claimData, fields: fields }, function(err, csv) {
+                              if (err) console.log(err);
 
-                            {data : respObj, session: req.session},
+                              var file = __dirname + '/claimsDataFile.csv';
 
-                            function(err, result) {
-
-                                if (!err) {
-
-                                    res.send(result);
-
-                                }else {
-
-                                    res.send('An error occurred');
-
-                                    console.log(err);
-
-                                }
-
+                               fs.writeFile(file, csv, function(err) {
+                                if (err) throw err;
+                                console.log('file saved');                       
+                                    ejs.renderFile('views/viewFraudClaims.ejs', 
+                                    {data : respObj, session: req.session},
+                                    function(err, result) {
+                                        if (!err) {
+                                            res.send(result);
+                                        }else {
+                                            res.send('An error occurred');
+                                            console.log(err);
+                                        }
+                                    });
+                               });
                         });
-
                     }
                         
                 });       
@@ -410,4 +407,11 @@ exports.getClaimsByDate = function(req, res){
             }                    
 
         });
+};
+
+
+exports.downloadClaims = function(req, res){
+     var file = __dirname + '/claimsDataFile.csv';
+
+  res.download(file);
 };

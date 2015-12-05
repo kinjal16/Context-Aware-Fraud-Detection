@@ -3,17 +3,13 @@ var drillAPI = require('../models/dataHandler');
 var json2csv = require('json2csv');
 var fs = require('fs');
 var request = require('request');
+var monk = require('monk');
+var db = monk('52.33.120.205:27017/master');
 
 exports.getCPTSearchPage = function(req, res){
-    var isLoggedIn = false;
-    if(req.session.company)
-        isLoggedIn = true;
-    else
-        isLoggedIn = false;
     
-    console.log(isLoggedIn + "session:" + req.session);
-     ejs.renderFile('views/searchCPT.ejs', 
-        {code : null, descrCPT : null, rangeFrom : null, rangeTo : null, isNewSearch : true, session : req.session, isLoggedIn : isLoggedIn},
+     ejs.renderFile('views/deleteCPT.ejs', 
+        {code : null, descrCPT : null, rangeFrom : null, rangeTo : null, isNewSearch : true, deleteSuccess : false},
         function(err, result) {
         if (!err) {
             res.send(result);
@@ -31,6 +27,7 @@ exports.getCPTData = function(req, res){
   res.download(file);
 };
 
+
 exports.getCPTDetails = function(req, res){
     var option = req.query.cpttype;
     var jsonObject = {};
@@ -40,11 +37,7 @@ exports.getCPTDetails = function(req, res){
     var rangeFrom = null;
     var rangeTo = null;
     var fields = ['CPT', 'Description', 'Cost'];
-     var isLoggedIn = false;
-    if(req.session)
-        isLoggedIn = true;
-    else
-        isLoggedIn = false;
+   
     jsonObject.queryType = 'SQL';
     console.log(option);
     switch(option){
@@ -82,8 +75,8 @@ exports.getCPTDetails = function(req, res){
                 console.log('file saved');                
               });
             }); 
-           ejs.renderFile('views/searchCPT.ejs',
-                {code : code, descrCPT : descr, rangeFrom : rangeFrom, rangeTo : rangeTo, data : result.data.rows, length : result.data.rows.length, isNewSearch : false, session : req.session, isLoggedIn : isLoggedIn},
+           ejs.renderFile('views/deleteCPT.ejs',
+                {code : code, descrCPT : descr, rangeFrom : rangeFrom, rangeTo : rangeTo, data : result.data.rows, length : result.data.rows.length, isNewSearch : false, deleteSuccess : false},
                 function(err, result) {
                 if (!err) {
                     res.send(result);
@@ -95,4 +88,22 @@ exports.getCPTDetails = function(req, res){
         }else
             res.send("Error occured in connecting to API");
     });   
+};
+
+exports.deleteCPT = function(req, res){
+    var code = req.body.cpt;
+    var collection = db.get('cpt');
+    var info ={};
+	info["CPT"]=req.body.cpt;
+    collection.remove(info);
+     ejs.renderFile('views/deleteCPT.ejs',
+                {code : null, descrCPT : null, rangeFrom : null, rangeTo : null, data : null, length : null, isNewSearch : true, deleteSuccess : true},
+                function(err, result) {
+                if (!err) {
+                    res.send(result);
+                }else {
+                    res.send('An error occurred');
+                    console.log(err);
+                }
+            });	
 };
