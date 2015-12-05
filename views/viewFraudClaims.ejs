@@ -79,12 +79,19 @@ function googleTranslateElementInit() {
                              To Date:<input required type="date" id="tdate" name="tdate">&emsp;
                             
                              <input type="submit" id="detectfraud" name="detectfraud" value="Get Claims"><br><br>
+                                  
                              </form>
-                                 
+                             <form id="uploadForm" action="/downloadClaims" method="get">
+                                         <div class="form-group" id="code-display" align="right">
+                                            <button type="submit" class="btn btn-default" >Download Data</button>
+                                        </div>
+                                </form>        
+                             
                              <div id="tab1">
                             
                              
                              <table id="details" class="table table-striped table-bordered">
+                                  
                              	<thead><tr><th>EmployeeId</th>
                 
                              			<th>FirstName</th>

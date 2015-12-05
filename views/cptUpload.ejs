@@ -59,7 +59,17 @@
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-6">
-
+                        <form id="uploadCPTData" enctype="multipart/form-data" action="/uploadCPTJson" method="post">
+                            <span class="btn btn-success fileinput-button">
+                               <input type="file" id="uploadCPT" name="uploadCPT" />
+                            </span>
+                            <button type="submit" class="btn btn-primary start">
+                                <i class="glyphicon glyphicon-upload"></i>
+                                <span>Upload CPT Data</span>
+                            </button>
+                            <br>
+                            <p style="margin:20px 0 0 150px"><img id="uploadPic" src="" alt="" /></p>
+                        </form>
                         <form role="form" action="/cptUpload" method="post">
 							<div class="form-group">
                                 <label for="cpt">CPT Code</label>

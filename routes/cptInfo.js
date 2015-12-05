@@ -31,7 +31,6 @@ exports.getCPTData = function(req, res){
   res.download(file);
 };
 
-
 exports.getCPTDetails = function(req, res){
     var option = req.query.cpttype;
     var jsonObject = {};

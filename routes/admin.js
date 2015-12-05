@@ -3,6 +3,8 @@ var request = require("request");
 var monk = require('monk');
 var db = monk('52.33.120.205:27017/master');
 var drillAPI = require('../models/dataHandler');
+var fs = require('fs');
+var async = require('async');
 
 exports.getCPTUpload = function(req, res){
      ejs.renderFile('views/cptUpload.ejs', 
@@ -72,4 +74,46 @@ exports.uploadCPTData = function(req, res){
                     });
         }
     });    
+};
+
+exports.uploadCPTJson = function(req, res){
+    var collection = db.get('cpt');
+    console.log(req.files);
+    var pathName = req.files.uploadCPT.path;
+   
+   // var pathName=__dirname + serverPath;
+    console.log("path:" + pathName);
+
+    async.series([
+                  function(callback){
+                     fs.readFile(pathName,'utf8', function (err, data) {
+                          if (err) 
+                              callback(err);
+                          else{
+                              console.log(data);
+                              try{
+                                  var json = JSON.parse(data);
+                                  collection.insert(json);
+                              }catch(e){
+                                  console.log("inside catch");
+                              }
+                              callback();
+                          }
+                      });                     
+                  }
+    ],function(err){
+        if(!err){
+             ejs.renderFile('views/cptUpload.ejs', 
+                {session: req.session, uploadSuccess : true, duplicate : false, error : false},
+                function(err, result) {
+                if (!err) {
+                    res.send(result);
+                }else {
+                    res.send('An error occurred');
+                    console.log(err);
+                }
+            });	
+        }else
+            console.log(err);
+    });
 };

@@ -40,6 +40,8 @@ var router = express.Router();
     router.post('/validateUser', login.getLoginDetails);
 
     router.get('/download', cpt.getCPTData);
+
+    router.get('/downloadClaims', dashboard.downloadClaims);
     
     router.get('/viewEmployees', validate.validateSession, emp.getEmployees);
 
@@ -64,5 +66,7 @@ var router = express.Router();
     router.get('/searchCPTByCodeAdmin', cptAdmin.getCPTDetails);
 
     router.post('/deleteCPT', cptAdmin.deleteCPT);
+
+    router.post('/uploadCPTJson',admin.uploadCPTJson);
 
 module.exports = router;

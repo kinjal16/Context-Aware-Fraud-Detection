@@ -45,10 +45,10 @@
                                 <a href="/employeeDetails">Employee Info</a>
                             </li>
                             <li>
-                                <a href="/employeeBillDetails" onclick="checkLocalStorage();" id="employeeBill">Employee Claim Info</a>
+                                <a href="/employeeBillDetails" id="employeeBill">Employee Claim Info</a>
                             </li>
                             <li>
-                                <a href="#" onclick="checkLocalStorage();" id="employeeBill">Employee Claim Image Upload</a>
+                                <a href="#" id="employeeBill">Employee Claim Image Upload</a>
                             </li>
                         </ul>
                     </li>                 
@@ -56,7 +56,7 @@
                         <a href="/viewEmployees"><i class="fa fa-fw fa-file"></i>View Employees</a>
                     </li>   
                      <li class="active">
-                        <a href="/viewClaims"><i class="fa fa-fw fa-file"></i>View Fraud Claims</a>
+                        <a href="/viewClaims"><i class="fa fa-fw fa-file"></i>View Claims</a>
                     </li>  
                      <li class="active">
                         <a href="/searchCPT"><i class="fa fa-fw fa-file"></i>Search CPT Details</a>
@@ -65,19 +65,3 @@
             </div>
             <!-- /.navbar-collapse -->
         </nav>
-    <script type="text/javascript">
-  	function checkLocalStorage(){
-  		if(localStorage.getItem("diagnosisDescription")===null){
-  			console.log("localstorage not present");
-  			document.getElementById("employeeBill").href="IcdDescription";
-  		}
-  		else{
-  			console.log("localstorage present");
-  			document.getElementById("employeeBill").href="uploadEmployeeBillInfoLocalStorage.jsp";
-  		}
-  	}
-  	
-  </script>
-                    
-
- 
