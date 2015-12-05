@@ -3,5 +3,8 @@ var config = module.exports = {
         host : '52.33.120.205',
         port : '8047',
         path : '/query.json'        
-    }    
+    },
+    monk : {
+        path : '52.33.120.205:27017/master'
+    }
 };
