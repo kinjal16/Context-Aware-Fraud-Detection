@@ -11,12 +11,17 @@ var options = {
 var isLoggedIn = false;
 exports.imageUploadPage = function(req, res){
 	
-    if(req.session.company)
+	var sessionState = null;
+    if(req.session.company) {
         isLoggedIn = true;
-    else
+        sessionState = req.session;
+    }
+    else {
         isLoggedIn = false;
+        sessionState = null;
+    }
     ejs.renderFile('views/ocr.ejs', 
-       {code : null, isNewSearch : true,session: req.session, fraudInfoData:null, isLoggedIn : isLoggedIn,errorMsg:null, isFraud:null},
+       {code : null, isNewSearch : true,session: sessionState, fraudInfoData:null, isLoggedIn : isLoggedIn,errorMsg:null, isFraud:null},
        function(err, result) {
        if (!err) {
            res.send(result);
@@ -42,6 +47,15 @@ exports.getOCRFraudDetails = function(req, res) {
    // console.log(serverPath);
     console.log(pathName);
     var isFraud = true;
+    var sessionState = null;
+    if(req.session.company) {
+        isLoggedIn = true;
+        sessionState = req.session;
+    }
+    else {
+        isLoggedIn = false;
+        sessionState = null;
+    }
 //    if(isEmpty(req.files)){
 //    	errorMsg="Please upload a file";
 //    	ejs.renderFile('views/ocr.ejs', 
@@ -199,7 +213,7 @@ exports.getOCRFraudDetails = function(req, res) {
 	            	        console.log(errorMsg);
 	            	    }//else ends here
 	            	   ejs.renderFile('views/ocr.ejs', 
-	            			   {code : null, isNewSearch : true, fraudInfoData: fraudInfo, session: req.session, isLoggedIn : isLoggedIn, errorMsg:errorMsg, isFraud:isFraud},
+	            			   {code : null, isNewSearch : true, fraudInfoData: fraudInfo, session: sessionState, isLoggedIn : isLoggedIn, errorMsg:errorMsg, isFraud:isFraud},
 				    		       function(err, result) {
 				    		       if (!err) {
 				    		           res.send(result);

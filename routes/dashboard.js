@@ -9,8 +9,9 @@ module.exports.getDashboard = function(req, res){
     var respObj = {};
     var tempObj = {};
     var company = req.session.company;
-    console.log("company:" + company);
-    if(company !== undefined || company !== null || company != ''){
+
+    if(company !== undefined || company !== null || company != '' || company != 'admin'){
+
         console.log(company);
         async.series([
             function(callback){
