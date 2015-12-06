@@ -35,10 +35,11 @@ exports.getOCRFraudDetails = function(req, res) {
     var errorMsg;
     var collection = db.get('employee_claim');
     var cptCollection = db.get('cpt');
-	var serverPath = '/images/' + req.files.userPhoto.name;
-	var pathName=__dirname+serverPath;
+	//var serverPath = '/images/' + req.files.userPhoto.name;
+	//var pathName=__dirname+serverPath;
+    var pathName = req.files.userPhoto.path;
 	var fraudInfo={};
-    console.log(serverPath);
+   // console.log(serverPath);
     console.log(pathName);
     var isFraud = true;
 //    if(isEmpty(req.files)){
@@ -54,7 +55,7 @@ exports.getOCRFraudDetails = function(req, res) {
 //	    		       }
 // 		});	 
 //    }
-    require('fs').rename(
+   /* require('fs').rename(
         req.files.userPhoto.path,pathName,
         function(error) {
 
@@ -64,7 +65,7 @@ exports.getOCRFraudDetails = function(req, res) {
                 }));
                 return;
             }
-            else{
+            else{*/
             	tesseract.process(pathName,options,function(err, text) {
             		 if(err) {
 	            	        console.error(err);
@@ -213,7 +214,7 @@ exports.getOCRFraudDetails = function(req, res) {
 		           
 	 
             	
-            }
+       /*     }
         }
-    );
+    );*/
 }

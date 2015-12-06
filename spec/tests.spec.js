@@ -2,6 +2,15 @@ var request = require('request');
 
 describe('test all REST APIs', function(){
     
+    describe('GET /', function(){
+        it('Should return status code as 200', function(done){
+            request.get("http://localhost:3000/", function(error, response, body){
+              expect(response.statusCode).toEqual(200);
+              done();      
+           });
+        });       
+    });
+    
     describe('GET /dashboard', function(){
         it('Should return status code as 200', function(done){
             request.get("http://localhost:3000/dashboard", function(error, response, body){
@@ -76,6 +85,35 @@ describe('test all REST APIs', function(){
            });
         });       
     });
+    
+    describe('GET /viewEmployees', function(){
+        it('Should return status code as 200', function(done){
+            request.get("http://localhost:3000/viewEmployees", function(error, response, body){
+              expect(response.statusCode).toEqual(200);
+              done();      
+           });
+        });       
+    });
+    
+    describe('GET /employeeDetails', function(){
+        it('Should return status code as 200', function(done){
+            request.get("http://localhost:3000/employeeDetails", function(error, response, body){
+              expect(response.statusCode).toEqual(200);
+              done();      
+           });
+        });       
+    });
+    
+    describe('GET /employeeBillDetails', function(){
+        it('Should return status code as 200', function(done){
+            request.get("http://localhost:3000/employeeBillDetails", function(error, response, body){
+              expect(response.statusCode).toEqual(200);
+              done();      
+           });
+        });       
+    });
+    
+    
     
      /*describe('GET /viewClaims', function(){
         it('Should return status code as 200', function(done){

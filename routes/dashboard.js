@@ -9,7 +9,8 @@ module.exports.getDashboard = function(req, res){
     var respObj = {};
     var tempObj = {};
     var company = req.session.company;
-    if(company !== 'undefined' || company !== 'null' || company != ''){
+    console.log("company:" + company);
+    if(company !== undefined || company !== null || company != ''){
         console.log(company);
         async.series([
             function(callback){
@@ -22,10 +23,11 @@ module.exports.getDashboard = function(req, res){
                         drillAPI.requestDrillAPI(params, function(result){
                             if(result){
                                 if(result.data.rows){
-                                    if(result.data.rows.length > 0){
+                                    if(result.data.rows.length > 0 && result.data.rows[0].TotCount){
                                         respObj.totalEmployees = result.data.rows[0].TotCount;
                                         callback();                        
                                     }else{
+                                        console.log("hello");
                                         respObj.totalEmployees = 0;
                                         callback();
                                     }
@@ -45,7 +47,7 @@ module.exports.getDashboard = function(req, res){
                 drillAPI.requestDrillAPI(params, function(result){
                     if(result){
                           if(result.data.rows){
-                            if(result.data.rows.length > 0){
+                           if(result.data.rows.length > 0 && result.data.rows[0].TotCount){
                                 respObj.totalClaims = result.data.rows[0].TotCount;
                                 callback();
                             }else{
@@ -214,7 +216,11 @@ exports.getFraudCount = function(company, callback){
                     async.forEach(respObj.cptData, function(item, callback){ 
                          var claimDetails = {};
                         var isCurrMonth = false;
-                        var costData = JSON.parse(item.cpt);
+                        var costData = "";
+                        try{
+                            costData = JSON.parse(item.cpt);
+                        }catch(e){}
+                        
                         var isFraud = false;
                         var billdate = new Date(item.billdate);
                        // billdate = billdate.toUTCString();
@@ -242,7 +248,7 @@ exports.getFraudCount = function(company, callback){
                                         if(result.data.rows.length > 0){ 
                                             var cost = parseFloat(result.data.rows[0].Cost);                                  
                                             diffAmt = (0.40)*cost + cost;                                   
-                                            if((claim - diffAmt) >= 0){
+                                            if((claim - diffAmt) >= 50){
                                                  isFraud = true;
                                                 if(cptJson[code])
                                                    cptJson[code] = cptJson[code] + 1;
