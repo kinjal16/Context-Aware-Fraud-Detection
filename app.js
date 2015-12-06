@@ -11,7 +11,7 @@ var	ejs = require("ejs");
 var request = require("request");
 var client = require("./routes/redis-client.js");
 var app = express();
-//var favicon = require('serve-favicon');
+var favicon = require('serve-favicon');
 var favicon = require('static-favicon');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -44,8 +44,8 @@ client.on('connect', function() {
 });
 
 client.on('error', function (er) {
-	  console.trace('Module A') // [1]
-	  console.error(er.stack) // [2]
+	  console.trace('Module A'); // [1]
+	  console.error(er.stack); // [2]
 });
 var server = http.createServer(app);
 
