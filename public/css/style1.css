@@ -247,7 +247,7 @@ input {
 
 #w::after {
   content: "";
-  background: url(../images/fraud-scrabble.jpg) no-repeat center top;
+  background: url(/ui/images/fraud-scrabble.jpg) no-repeat center top;
   background-size: 100% 100%;
   opacity: 0.5;
   top: 0;

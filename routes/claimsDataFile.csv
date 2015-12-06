@@ -1,0 +1,9 @@
+"data","isFraud"
+"{""cpt"":""[{\"code\":10021.0,\"claim\":5000.0},{\"code\":10022.0,\"claim\":6000.0}]"",""FirstName"":""Eugene"",""billdate"":""2015-10-01"",""employeeId"":""1"",""LastName"":""Watson"",""billno"":""EK1243""}",true
+"{""cpt"":""[{\"code\":21248.0,\"claim\":4000.0},{\"code\":21210.0,\"claim\":5000.0}]"",""FirstName"":""Betty"",""billdate"":""2015-10-01"",""employeeId"":""2"",""LastName"":""Banks"",""billno"":""EK1253""}",false
+"{""cpt"":""[{\"code\":21248.0,\"claim\":2000.0},{\"code\":21210.0,\"claim\":3000.0}]"",""FirstName"":""Betty"",""billdate"":""2015-10-01"",""employeeId"":""2"",""LastName"":""Banks"",""billno"":""EK1234""}",false
+"{""cpt"":""[{\"code\":10021.0,\"claim\":2000.0},{\"code\":10022.0,\"claim\":3000.0}]"",""FirstName"":""Eugene"",""billdate"":""2015-10-01"",""employeeId"":""1"",""LastName"":""Watson"",""billno"":""EK1232""}",true
+"{""cpt"":""[{\"code\":10040.0,\"claim\":2000.0},{\"code\":10060.0,\"claim\":3000.0}]"",""FirstName"":""Betty"",""billdate"":""2015-11-21"",""employeeId"":""2"",""LastName"":""Banks"",""billno"":""EK12311""}",true
+"{""cpt"":""[{\"code\":10021.0,\"claim\":3000.0},{\"code\":10022.0,\"claim\":4000.0}]"",""FirstName"":""Diane"",""billdate"":""2015-11-01"",""employeeId"":""3"",""LastName"":""Richards"",""billno"":""EK2345""}",true
+"{""cpt"":""[{\"code\":21248.0,\"claim\":6000.0},{\"code\":21210.0,\"claim\":2000.0}]"",""FirstName"":""Sarah"",""billdate"":""2015-11-01"",""employeeId"":""4"",""LastName"":""Duncan"",""billno"":""EK2346""}",false
+"{""cpt"":""[{\"code\":10021.0,\"claim\":2000.0},{\"code\":10040.0,\"claim\":3000.0}]"",""FirstName"":""Eugene"",""billdate"":""2015-11-21"",""employeeId"":""1"",""LastName"":""Watson"",""billno"":""EK1287""}",true

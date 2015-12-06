@@ -33,6 +33,15 @@
 	<script>
 	  $(document).ready( function () {
 	    	$('#details').dataTable();
+	    	$('#tdate').change(function () {
+		    	var startDate = Date.parse($('#fdate').val())/1000;
+				var endDate = Date.parse($('#tdate').val())/1000;
+				
+				if (startDate > endDate){
+					alert("Please select To date after From date");
+					$('#tdate').val('');
+				}
+		    });
 		} );
   </script>
 </head>
@@ -73,17 +82,20 @@ function googleTranslateElementInit() {
                            
                              <div id="container1" style="min-width: 110px; height: auto; margin: 0 auto">
                              <form action ="/claimsByDateRange" method="get">
-                            
-                             From Date:<input required type="date" id="fdate" name="fdate">&emsp;
-                            
-                             To Date:<input required type="date" id="tdate" name="tdate">&emsp;
-                            
+                            	<div id="time-range">
+                            	<label for='fdate'>From
+                                    <input required type="date" id="fdate" name="fdate">
+                                </label>
+                                <label for='tdate'>To
+                                    <input required type="date" id="tdate" name="tdate">
+                                </label>
+                            	</div>
                              <input type="submit" id="detectfraud" name="detectfraud" value="Get Claims"><br><br>
                                   
                              </form>
                              <form id="uploadForm" action="/downloadClaims" method="get">
                                          <div class="form-group" id="code-display" align="right">
-                                            <button type="submit" class="btn btn-default" >Download Data</button>
+                                            <button type="submit" class="green-download"><img src="/ui/images/download_icon.png" title="Download as csv file" /></button>
                                         </div>
                                 </form>        
                              
