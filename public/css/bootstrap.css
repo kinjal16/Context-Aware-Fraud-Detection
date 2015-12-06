@@ -2550,7 +2550,7 @@ output {
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
-  background-color: #fff;
+  background-color: #CCCC99;
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -5539,7 +5539,7 @@ a.list-group-item-danger.active:focus {
   border-color: #ddd;
 }
 .panel-default > .panel-heading {
-  color: #333;
+  color: #BDB76B;
   background-color: #336666;
   border-color: #ddd;
 }
