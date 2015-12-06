@@ -110,7 +110,13 @@
     </form>
 
 	<% if(fraudInfoData){ %>
-		<p><span><%=fraudInfoData.name%>  </span>with Bill No: <span><%=fraudInfoData.billno%>  </span>
+	
+		<% if(session != null) { %>
+		<p>
+		<% } else { %>
+		<p style="color: #DEB887;">
+		<% } %>
+		<span><%=fraudInfoData.name%>  </span>with Bill No: <span><%=fraudInfoData.billno%>  </span>
 			<% if(isFraud){ %>
 				<span> is a fraud bill</span>
 			<% }%>
