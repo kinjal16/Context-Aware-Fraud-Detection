@@ -9,9 +9,9 @@ var express = require("express");
 var path = require("path");
 var	ejs = require("ejs");
 var request = require("request");
-//var client = require("./routes/redis-client.js");
+var client = require("./routes/redis-client.js");
 var app = express();
-//var favicon = require('serve-favicon');
+var favicon = require('serve-favicon');
 var favicon = require('static-favicon');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -39,14 +39,14 @@ var routes = require('./routes/router');
 app.use('/ui',express.static(path.join(__dirname, 'public')));
 app.use('/',routes);
 
-/*client.on('connect', function() {
+client.on('connect', function() {
     console.log('Redis connected');
 });
 
 client.on('error', function (er) {
-	  console.trace('Module A') // [1]
-	  console.error(er.stack) // [2]
-});*/
+	  console.trace('Module A'); // [1]
+	  console.error(er.stack); // [2]
+});
 var server = http.createServer(app);
 
 server.listen(app.get('port'), function(){
