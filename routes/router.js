@@ -2,7 +2,7 @@ var	ejs = require("ejs");
 var cpt = require('./cptInfo');
 var login = require('./loginInfo');
 var emp = require('./employeeInfo');
-//var client = require("./redis-client.js");
+var client = require("./redis-client.js");
 var dashboard = require('./dashboard');
 var express = require('express');
 var path = require('path');
@@ -15,7 +15,7 @@ var ocr = require('./ocr');
 
 //module.exports = function(app){
 
-	router.get('/', function (req, res) {
+	router.get('/', login.getCPTCache, function (req, res) {
         ejs.renderFile('views/landing.ejs',
                 function(err, result) {
                 // render on success
@@ -77,5 +77,11 @@ var ocr = require('./ocr');
     router.post('/detectFraud', ocr.getOCRFraudDetails);
     
     router.get('/uploadImage',ocr.imageUploadPage);
+    
+    router.get('/logout', login.logout);
+    
+    router.post('/signup', login.signup);
+    
+    router.get('/employeeByDate', emp.getEmployeesByDate);
     
 module.exports = router;

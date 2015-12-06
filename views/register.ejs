@@ -27,6 +27,36 @@
   				$(this).addClass('active');
   				e.preventDefault();
  			});
+	
+			$("#password1").on('input', function() {
+			  	var pwd = $(this).val();
+			  	var len = pwd.length;
+				var validateSpChar = /[a-zA-Z0-9]/g;
+				var validateLowerChar = /[^a-z]/g;
+				var validateUpperChar = /[^A-Z]/g;
+				var strength = document.getElementById('pwd_strength');
+				var sString = pwd.replace(validateSpChar,"");
+				var lString = pwd.replace(validateLowerChar,"");
+				var uString = pwd.replace(validateUpperChar,"");
+				
+				if(uString.length >=3){
+					if(lString.length >=2){
+						if(sString.length == 2){
+							strength.value = 50;	
+							$("#pwd_span").text("Normal");
+						}else if(sString.length >2 && sString.length <= 5){
+							strength.value = 75;
+							$("#pwd_span").text("Medium");
+						}else if(sString.length > 5){
+							strength.value = 100;
+							$("#pwd_span").text("Strong");
+						}				
+					}
+				}else {
+					strength.value = 25;
+					$("#pwd_span").text("Weak.");;
+				}
+			});
  		}); 
  	</script>
 </head>
@@ -36,19 +66,21 @@
 			new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
 		}
 	</script>
- 	<div id="wrapper">
-  		<!-- Navigation -->
-  			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-   				<!-- Brand and toggle get grouped for better mobile display -->
-   				<div class="navbar-header">
-    				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-     					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-    				</button>
-   				</div>
-  			</nav> 
+ 	<% if(session != null) { %>
+    <div id="wrapper">
+ 	<% } %>  
+  		 
+        <!-- Navigation -->
+		
+             <% include SideBar.ejs %>
    			<div class="container">
     			<div class="row">
      				<div class="col-md-6 col-md-offset-3">
+     				
+     				<% if(msg != null) { %>
+     				<span style="color:red;font-size: 17px;"><%= msg %></span><br />
+     				<% } %> 
+     				
       					<div class="panel panel-login">
        						<div class="panel-heading">
         						<div class="row">
@@ -91,21 +123,22 @@
             							</div>
            							</div>
           						</form>
-          						<form id="register-form" role="form" style="display: none;" method="post" action="RegistrationPage">
+          						<form id="register-form" role="form" style="display: none;" method="post" action="/signup">
            							<div class="form-group">
-            							<input type="text" name="username" id="username1" tabindex="1" class="form-control" placeholder="Username" value="">
+            							<input required type="text" name="username" id="username1" tabindex="1" class="form-control" placeholder="Username" value="">
            							</div>
            							<div class="form-group">
-            							<input type="text" name="firstname" id="firstname" tabindex="1" class="form-control" placeholder="First Name" value="">
+            							<input required type="text" name="firstname" id="firstname" tabindex="1" class="form-control" placeholder="First Name" value="">
            							</div>
            							<div class="form-group">
-            							<input type="text" name="lastname" id="lastname" tabindex="1" class="form-control" placeholder="Last Name" value="">
+            							<input required type="text" name="lastname" id="lastname" tabindex="1" class="form-control" placeholder="Last Name" value="">
            							</div>
            							<div class="form-group">
-            							<input type="text" name="company" id="company" tabindex="1" class="form-control" placeholder="Company" value="">
+            							<input required type="text" name="company" id="company" tabindex="1" class="form-control" placeholder="Company" value="">
            							</div>
            							<div class="form-group">
-            							<input type="password" name="password" id="password1" tabindex="2" class="form-control" placeholder="Password">
+            							<input required type="password" name="password" id="password1" tabindex="2" class="form-control" placeholder="Password"><br />
+            							Password Strength: <progress id="pwd_strength" max="100" value="0"></progress>&nbsp;<span id="pwd_span"></span>
            							</div>
            							<div class="form-group">
             							<div class="row">
@@ -123,6 +156,9 @@
     	</div>
 	</div>
    	<div id="google_translate_element" align="right"></div>
-	</div> 
+   	<% if(session != null) { %>
+    </div> 
+ 	<% } %>  
+	
 </body>
 </html>

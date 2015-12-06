@@ -1,5 +1,6 @@
          <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        	<% if(session != null){ %>
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -10,7 +11,6 @@
                 </button>
              </div>
             <!-- Top Menu Items -->
-            <% if(session != "undefined"){ %>
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -26,14 +26,16 @@
                        
                         <li class="divider"></li>
                         <li>
-                            <a href="LogoutServlet"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
             </ul>
-            <% } %>
+           
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
+            	<% if(session.company != "admin"){ %>
+       
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
                         <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
@@ -62,6 +64,23 @@
                         <a href="/searchCPT"><i class="fa fa-fw fa-file"></i>Search CPT Details</a>
                     </li>
                 </ul>
+                <% } else { %>
+                	<ul class="nav navbar-nav side-nav">
+                    <li class="active">
+                        <a href="/cptUpload"><i class="fa fa-fw fa-dashboard"></i> Upload CPT data</a>
+                    </li>  
+                     <li class="active">
+                        <a href="/searchCPTAdmin"><i class="fa fa-fw fa-file"></i>Search/Edit CPT data</a>
+                    </li>
+                </ul>
+                <% } %>
             </div>
+            <% } else { %>
+            	<ul class="nav navbar-right top-nav">
+	                <li class="dropdown">
+	                    <a href="/">Home</a>
+	                </li>
+	            </ul>
+            <% } %>
             <!-- /.navbar-collapse -->
         </nav>

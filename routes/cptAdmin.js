@@ -9,7 +9,7 @@ var db = monk(CONFIG_FILE.monk.path);
 exports.getCPTSearchPage = function(req, res){
     
      ejs.renderFile('views/deleteCPT.ejs', 
-        {code : null, descrCPT : null, rangeFrom : null, rangeTo : null, isNewSearch : true, deleteSuccess : false},
+        {code : null, descrCPT : null, rangeFrom : null, rangeTo : null, isNewSearch : true, deleteSuccess : false, session: req.session},
         function(err, result) {
         if (!err) {
             res.send(result);
@@ -76,7 +76,7 @@ exports.getCPTDetails = function(req, res){
               });
             }); 
            ejs.renderFile('views/deleteCPT.ejs',
-                {code : code, descrCPT : descr, rangeFrom : rangeFrom, rangeTo : rangeTo, data : result.data.rows, length : result.data.rows.length, isNewSearch : false, deleteSuccess : false},
+                {session: req.session, code : code, descrCPT : descr, rangeFrom : rangeFrom, rangeTo : rangeTo, data : result.data.rows, length : result.data.rows.length, isNewSearch : false, deleteSuccess : false},
                 function(err, result) {
                 if (!err) {
                     res.send(result);
@@ -97,7 +97,7 @@ exports.deleteCPT = function(req, res){
 	info["CPT"]=req.body.cpt;
     collection.remove(info);
      ejs.renderFile('views/deleteCPT.ejs',
-                {code : null, descrCPT : null, rangeFrom : null, rangeTo : null, data : null, length : null, isNewSearch : true, deleteSuccess : true},
+                {session: req.session, code : null, descrCPT : null, rangeFrom : null, rangeTo : null, data : null, length : null, isNewSearch : true, deleteSuccess : true},
                 function(err, result) {
                 if (!err) {
                     res.send(result);
