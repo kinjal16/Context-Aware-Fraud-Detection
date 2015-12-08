@@ -83,6 +83,20 @@
                     <% if(errorMsg) {%>
                     		<label style="color:red"><%= errorMsg %></label>
                     <%}%>
+                    		<% if(session != null) { %>
+                            <div class="panel panel-default">
+                            <% } else { %>
+                            <div style=" background-color: rgba(0, 0, 0, 0.6);" class="panel panel-default">
+                            <% } %>
+                        
+                        
+  							<% if(session != null) { %>
+                            <div class="panel-heading">
+                            <% } else { %>
+                            <div style="background-color: rgba(43, 126, 138, 0.5); border-color: #ddd;" class="panel-heading">
+                            <% } %>
+                            </div>
+                            <div class="panel-body">
 						<form id="uploadForm"
 
           enctype="multipart/form-data"
@@ -112,20 +126,23 @@
 	<% if(fraudInfoData){ %>
 	
 		<% if(session != null) { %>
-		<p>
+		<p style="font-size: 13px;">
 		<% } else { %>
-		<p style="color: #DEB887;">
+		<p style="color: #DEB887; font-size: 13px;">
 		<% } %>
-		<span><%=fraudInfoData.name%>  </span>with Bill No: <span><%=fraudInfoData.billno%>  </span>
+		<span>Uploaded: Bill No. <%=fraudInfoData.billno%>  </span><br />
+		<span> Result: </span>
 			<% if(isFraud){ %>
-				<span> is a fraud bill</span>
+				<span style="color: red;">Fraud Detected</span>
 			<% }%>
 			<%if(!isFraud) { %>
-				<span> is not a fraud bill</span>
+				<span style="color: #33CC66;">No Fraud Detected</span>
 			<% } %>
 		
 		</p>
 	<%}%>
+					</div>
+					</div>
                     </div>
                    
                 </div>
