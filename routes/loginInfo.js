@@ -4,7 +4,7 @@ var async = require("async");
 var drillAPI = require('../models/dataHandler');
 var client = require("./redis-client.js");
 var monk = require('monk');
-var db = monk('52.33.120.205:27017/master');
+var db = monk(CONFIG_FILE.monk.path);
 
 exports.getLoginPage = function(req, res){
     ejs.renderFile('views/register.ejs', 
