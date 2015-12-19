@@ -1,7 +1,7 @@
 var	ejs = require("ejs");
 var drillAPI = require('../models/dataHandler');
 var monk = require('monk');
-var db = monk('52.33.120.205:27017/master');
+var db = monk(CONFIG_FILE.monk.path);
 var tesseract = require('node-tesseract');
 var options = {
 	    l: 'eng',
